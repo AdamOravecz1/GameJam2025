@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://hxme3shh4xb6"]
+[gd_scene load_steps=53 format=3 uid="uid://hxme3shh4xb6"]
 
 [ext_resource type="Texture2D" uid="uid://ci286dfxxgitn" path="res://Sprites/EmptyAquarium.png" id="1_xrdet"]
 [ext_resource type="Texture2D" uid="uid://dmladlj1vegxh" path="res://Sprites/MossLayer0.png" id="2_ruou6"]
@@ -6,75 +6,303 @@
 [ext_resource type="Texture2D" uid="uid://bdt6voosh4qhq" path="res://Sprites/MossLayer2.png" id="4_e18b1"]
 [ext_resource type="Texture2D" uid="uid://bo56nlp7b5nwx" path="res://Sprites/MossLayer3.png" id="5_3ie40"]
 [ext_resource type="Texture2D" uid="uid://wg8euiv8ojt2" path="res://Sprites/FernLayer0.png" id="6_eofww"]
+[ext_resource type="Texture2D" uid="uid://bgfbkhp78dp1l" path="res://Sprites/DeadMossLayer0.png" id="6_nh36g"]
 [ext_resource type="Texture2D" uid="uid://b3rhm3tt16wk8" path="res://Sprites/FernLayer1.png" id="7_4r6ov"]
+[ext_resource type="Texture2D" uid="uid://de4fy6xh5m8d1" path="res://Sprites/DeadMossLayer1.png" id="7_nvhex"]
 [ext_resource type="Texture2D" uid="uid://dri4cwva0kyh8" path="res://Sprites/FernLayer2.png" id="8_8gil5"]
+[ext_resource type="Texture2D" uid="uid://c0br3mdcxestw" path="res://Sprites/DeadMossLayer2.png" id="8_fsmrh"]
+[ext_resource type="Texture2D" uid="uid://cypgro4rcp8tw" path="res://Sprites/DeadMossLayer3.png" id="9_3ld8g"]
 [ext_resource type="Texture2D" uid="uid://cgd1calyagt5b" path="res://Sprites/FernLayer3.png" id="9_vb0b0"]
 [ext_resource type="Texture2D" uid="uid://cgpd8i61e8xnq" path="res://Sprites/PileaGlaucaLayer0.png" id="10_8s1kx"]
 [ext_resource type="Texture2D" uid="uid://d35yys423pujp" path="res://Sprites/PileaGlaucaLayer1.png" id="11_obj0d"]
 [ext_resource type="Texture2D" uid="uid://ybm1jy171ew0" path="res://Sprites/PileaGlaucaLayer2.png" id="12_vfrko"]
 [ext_resource type="Texture2D" uid="uid://cghpmqxwrdkg3" path="res://Sprites/PileaGlaucaLayer3.png" id="13_shpb2"]
+[ext_resource type="Texture2D" uid="uid://pcq16iujdv15" path="res://Sprites/DeadFernLayer0.png" id="14_rku4e"]
 [ext_resource type="Texture2D" uid="uid://jl7ylt0udkxi" path="res://Sprites/OrchidLayer0.png" id="14_siq48"]
 [ext_resource type="Texture2D" uid="uid://bk8o0cma26byr" path="res://Sprites/OrchidLayer1.png" id="15_c1jxx"]
+[ext_resource type="Texture2D" uid="uid://ro0c21g5mukq" path="res://Sprites/DeadFernLayer1.png" id="15_h0pof"]
+[ext_resource type="Texture2D" uid="uid://cthf6eiqgsmpj" path="res://Sprites/DeadFernLayer2.png" id="16_bwj8b"]
 [ext_resource type="Texture2D" uid="uid://dba3th3y0s6mm" path="res://Sprites/PothosLayer0.png" id="16_nkfi0"]
+[ext_resource type="Texture2D" uid="uid://c10ox6clsoslr" path="res://Sprites/DeadFernLayer3.png" id="17_0x0v8"]
 [ext_resource type="Texture2D" uid="uid://causrqqcknpdk" path="res://Sprites/PothosLayer1.png" id="17_opq4i"]
 [ext_resource type="Texture2D" uid="uid://7ji0r83ivm35" path="res://Sprites/DwarfSnakePlantLayer0.png" id="18_8as0l"]
 [ext_resource type="Texture2D" uid="uid://prusqypkut5c" path="res://Sprites/DwarfSnakePlantLayer1.png" id="19_yps2x"]
+[ext_resource type="Texture2D" uid="uid://1a08ufpyfono" path="res://Sprites/DeadPileaGlaucaLayer0.png" id="22_llrj2"]
+[ext_resource type="Texture2D" uid="uid://dwr7b205b3qyp" path="res://Sprites/DeadPileaGlaucaLayer1.png" id="23_osepx"]
+[ext_resource type="Texture2D" uid="uid://dnj5xk21lhh41" path="res://Sprites/DeadPileaGlaucaLayer2.png" id="24_bjvei"]
+[ext_resource type="Texture2D" uid="uid://ldd6lbt1ial" path="res://Sprites/DeadPileaGlaucaLayer3.png" id="25_dvqcb"]
+[ext_resource type="Texture2D" uid="uid://oga5faqygaox" path="res://Sprites/DeadOrchidLayer0.png" id="28_1c066"]
+[ext_resource type="Texture2D" uid="uid://dqsgvahdo7a4o" path="res://Sprites/DeadOrchidLayer1.png" id="29_hle1v"]
+[ext_resource type="Texture2D" uid="uid://cdcu8ld3h0n8m" path="res://Sprites/DeadPothosLayer0.png" id="32_i2j7m"]
+[ext_resource type="Texture2D" uid="uid://b5x7gv8bi8ykv" path="res://Sprites/DeadPothosLayer1.png" id="33_7rynf"]
+[ext_resource type="Texture2D" uid="uid://dd3r5h2lbycso" path="res://Sprites/DeadDwarfSnakePlantLayer0.png" id="36_r8coi"]
+[ext_resource type="Texture2D" uid="uid://ca4tskxn2vkoa" path="res://Sprites/DeadDwarfSnakePlantLayer1.png" id="37_5lh6v"]
+[ext_resource type="Texture2D" uid="uid://csfr7kpn7akp8" path="res://Sprites/DwarfWhiteIsopod.png" id="38_wulvh"]
+[ext_resource type="Texture2D" uid="uid://cag25o3stv2ae" path="res://Sprites/GreenhouseMillipede.png" id="39_tttab"]
+[ext_resource type="Texture2D" uid="uid://cv8wyexcqoac3" path="res://Sprites/MicroLandSnail.png" id="40_1hugj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vvt5"]
+atlas = ExtResource("38_wulvh")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeg3k"]
+atlas = ExtResource("38_wulvh")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bd3a"]
+atlas = ExtResource("38_wulvh")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyeqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vvt5")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeg3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bd3a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8s5b"]
+atlas = ExtResource("39_tttab")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk7bi"]
+atlas = ExtResource("39_tttab")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rbpd"]
+atlas = ExtResource("39_tttab")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_il23e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8s5b")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk7bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rbpd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrn21"]
+atlas = ExtResource("40_1hugj")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j54y6"]
+atlas = ExtResource("40_1hugj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxf5w"]
+atlas = ExtResource("40_1hugj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0467e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrn21")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j54y6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxf5w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node2D"]
 
 [node name="EmptyAquarium" type="Sprite2D" parent="."]
 texture = ExtResource("1_xrdet")
 
-[node name="MossLayer0" type="Sprite2D" parent="."]
+[node name="Moss" type="Node2D" parent="."]
+
+[node name="MossLayer0" type="Sprite2D" parent="Moss"]
 texture = ExtResource("2_ruou6")
 
-[node name="MossLayer1" type="Sprite2D" parent="."]
+[node name="MossLayer1" type="Sprite2D" parent="Moss"]
 texture = ExtResource("3_vehcd")
 
-[node name="MossLayer2" type="Sprite2D" parent="."]
+[node name="MossLayer2" type="Sprite2D" parent="Moss"]
 texture = ExtResource("4_e18b1")
 
-[node name="MossLayer3" type="Sprite2D" parent="."]
+[node name="MossLayer3" type="Sprite2D" parent="Moss"]
 texture = ExtResource("5_3ie40")
 
-[node name="FernLayer0" type="Sprite2D" parent="."]
+[node name="DeadMossLayer0" type="Sprite2D" parent="Moss"]
+visible = false
+texture = ExtResource("6_nh36g")
+
+[node name="DeadMossLayer1" type="Sprite2D" parent="Moss"]
+visible = false
+texture = ExtResource("7_nvhex")
+
+[node name="DeadMossLayer2" type="Sprite2D" parent="Moss"]
+visible = false
+texture = ExtResource("8_fsmrh")
+
+[node name="DeadMossLayer3" type="Sprite2D" parent="Moss"]
+visible = false
+texture = ExtResource("9_3ld8g")
+
+[node name="Fern" type="Node2D" parent="."]
+
+[node name="FernLayer0" type="Sprite2D" parent="Fern"]
 texture = ExtResource("6_eofww")
 
-[node name="FernLayer1" type="Sprite2D" parent="."]
+[node name="FernLayer1" type="Sprite2D" parent="Fern"]
 texture = ExtResource("7_4r6ov")
 
-[node name="FernLayer2" type="Sprite2D" parent="."]
+[node name="FernLayer2" type="Sprite2D" parent="Fern"]
 texture = ExtResource("8_8gil5")
 
-[node name="FernLayer3" type="Sprite2D" parent="."]
+[node name="FernLayer3" type="Sprite2D" parent="Fern"]
 texture = ExtResource("9_vb0b0")
 
-[node name="PileaGlaucaLayer0" type="Sprite2D" parent="."]
+[node name="DeadFernLayer0" type="Sprite2D" parent="Fern"]
+visible = false
+texture = ExtResource("14_rku4e")
+
+[node name="DeadFernLayer1" type="Sprite2D" parent="Fern"]
+visible = false
+texture = ExtResource("15_h0pof")
+
+[node name="DeadFernLayer2" type="Sprite2D" parent="Fern"]
+visible = false
+texture = ExtResource("16_bwj8b")
+
+[node name="DeadFernLayer3" type="Sprite2D" parent="Fern"]
+visible = false
+texture = ExtResource("17_0x0v8")
+
+[node name="PileaGlauca" type="Node2D" parent="."]
+
+[node name="PileaGlaucaLayer0" type="Sprite2D" parent="PileaGlauca"]
 texture = ExtResource("10_8s1kx")
 
-[node name="PileaGlaucaLayer1" type="Sprite2D" parent="."]
+[node name="PileaGlaucaLayer1" type="Sprite2D" parent="PileaGlauca"]
 texture = ExtResource("11_obj0d")
 
-[node name="PileaGlaucaLayer2" type="Sprite2D" parent="."]
+[node name="PileaGlaucaLayer2" type="Sprite2D" parent="PileaGlauca"]
 texture = ExtResource("12_vfrko")
 
-[node name="PileaGlaucaLayer3" type="Sprite2D" parent="."]
+[node name="PileaGlaucaLayer3" type="Sprite2D" parent="PileaGlauca"]
 texture = ExtResource("13_shpb2")
 
-[node name="OrchidLayer0" type="Sprite2D" parent="."]
+[node name="DeadPileaGlaucaLayer0" type="Sprite2D" parent="PileaGlauca"]
+visible = false
+texture = ExtResource("22_llrj2")
+
+[node name="DeadPileaGlaucaLayer1" type="Sprite2D" parent="PileaGlauca"]
+visible = false
+texture = ExtResource("23_osepx")
+
+[node name="DeadPileaGlaucaLayer2" type="Sprite2D" parent="PileaGlauca"]
+visible = false
+texture = ExtResource("24_bjvei")
+
+[node name="DeadPileaGlaucaLayer3" type="Sprite2D" parent="PileaGlauca"]
+visible = false
+texture = ExtResource("25_dvqcb")
+
+[node name="Orchid" type="Node2D" parent="."]
+
+[node name="OrchidLayer0" type="Sprite2D" parent="Orchid"]
 texture = ExtResource("14_siq48")
 
-[node name="OrchidLayer1" type="Sprite2D" parent="."]
+[node name="OrchidLayer1" type="Sprite2D" parent="Orchid"]
 texture = ExtResource("15_c1jxx")
 
-[node name="PothosLayer0" type="Sprite2D" parent="."]
+[node name="DeadOrchidLayer0" type="Sprite2D" parent="Orchid"]
+visible = false
+texture = ExtResource("28_1c066")
+
+[node name="DeadOrchidLayer1" type="Sprite2D" parent="Orchid"]
+visible = false
+texture = ExtResource("29_hle1v")
+
+[node name="Pothos" type="Node2D" parent="."]
+modulate = Color(0.921569, 0.921569, 0.937255, 1)
+
+[node name="PothosLayer0" type="Sprite2D" parent="Pothos"]
 texture = ExtResource("16_nkfi0")
 
-[node name="PothosLayer1" type="Sprite2D" parent="."]
+[node name="PothosLayer1" type="Sprite2D" parent="Pothos"]
 texture = ExtResource("17_opq4i")
 
-[node name="DwarfSnakePlantLayer0" type="Sprite2D" parent="."]
+[node name="DeadPothosLayer0" type="Sprite2D" parent="Pothos"]
+visible = false
+texture = ExtResource("32_i2j7m")
+
+[node name="DeadPothosLayer1" type="Sprite2D" parent="Pothos"]
+visible = false
+texture = ExtResource("33_7rynf")
+
+[node name="DwarfSnakePlant" type="Node2D" parent="."]
+
+[node name="DwarfSnakePlantLayer0" type="Sprite2D" parent="DwarfSnakePlant"]
 texture = ExtResource("18_8as0l")
 
-[node name="DwarfSnakePlantLayer1" type="Sprite2D" parent="."]
+[node name="DwarfSnakePlantLayer1" type="Sprite2D" parent="DwarfSnakePlant"]
 texture = ExtResource("19_yps2x")
+
+[node name="DeadDwarfSnakePlantLayer0" type="Sprite2D" parent="DwarfSnakePlant"]
+visible = false
+texture = ExtResource("36_r8coi")
+
+[node name="DeadDwarfSnakePlantLayer1" type="Sprite2D" parent="DwarfSnakePlant"]
+visible = false
+texture = ExtResource("37_5lh6v")
+
+[node name="DwarfWhiteIsopod" type="AnimatedSprite2D" parent="."]
+position = Vector2(6, 138)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_dyeqw")
+autoplay = "default"
+frame_progress = 0.489919
+
+[node name="GreenhouseMillipede" type="AnimatedSprite2D" parent="."]
+position = Vector2(21, 112)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_il23e")
+autoplay = "default"
+frame_progress = 0.963447
+
+[node name="MicroLandSnail" type="AnimatedSprite2D" parent="."]
+position = Vector2(-20, 96)
+sprite_frames = SubResource("SpriteFrames_0467e")
+autoplay = "default"
+frame_progress = 0.589921
