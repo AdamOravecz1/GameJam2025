@@ -1,0 +1,150 @@
+[gd_scene load_steps=18 format=3 uid="uid://b5jcs0qh5sgu6"]
+
+[ext_resource type="Script" path="res://Scripts/small_animal.gd" id="1_mwe71"]
+[ext_resource type="Texture2D" uid="uid://csfr7kpn7akp8" path="res://Sprites/DwarfWhiteIsopod.png" id="2_vt4c6"]
+[ext_resource type="Texture2D" uid="uid://cag25o3stv2ae" path="res://Sprites/GreenhouseMillipede.png" id="3_mockq"]
+[ext_resource type="Texture2D" uid="uid://cv8wyexcqoac3" path="res://Sprites/MicroLandSnail.png" id="4_i81a1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vvt5"]
+atlas = ExtResource("2_vt4c6")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeg3k"]
+atlas = ExtResource("2_vt4c6")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bd3a"]
+atlas = ExtResource("2_vt4c6")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_imd1t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vvt5")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeg3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bd3a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8s5b"]
+atlas = ExtResource("3_mockq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk7bi"]
+atlas = ExtResource("3_mockq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rbpd"]
+atlas = ExtResource("3_mockq")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_310ce"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8s5b")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk7bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rbpd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrn21"]
+atlas = ExtResource("4_i81a1")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j54y6"]
+atlas = ExtResource("4_i81a1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxf5w"]
+atlas = ExtResource("4_i81a1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1siev"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrn21")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j54y6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxf5w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvalg"]
+radius = 3.60555
+
+[node name="SmallAnimal" type="Node2D"]
+script = ExtResource("1_mwe71")
+
+[node name="DwarfWhiteIsopod" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_imd1t")
+autoplay = "default"
+frame_progress = 0.967413
+
+[node name="GreenhouseMillipede" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_310ce")
+autoplay = "default"
+frame_progress = 0.248931
+
+[node name="MicroLandSnail" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1siev")
+autoplay = "default"
+frame_progress = 0.285461
+
+[node name="Way" type="RayCast2D" parent="."]
+target_position = Vector2(24, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hvalg")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

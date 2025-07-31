@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://hxme3shh4xb6"]
+[gd_scene load_steps=49 format=3 uid="uid://hxme3shh4xb6"]
 
 [ext_resource type="Texture2D" uid="uid://ci286dfxxgitn" path="res://Sprites/EmptyAquarium.png" id="1_xrdet"]
 [ext_resource type="Texture2D" uid="uid://dmladlj1vegxh" path="res://Sprites/MossLayer0.png" id="2_ruou6"]
@@ -37,272 +37,328 @@
 [ext_resource type="Texture2D" uid="uid://b5x7gv8bi8ykv" path="res://Sprites/DeadPothosLayer1.png" id="33_7rynf"]
 [ext_resource type="Texture2D" uid="uid://dd3r5h2lbycso" path="res://Sprites/DeadDwarfSnakePlantLayer0.png" id="36_r8coi"]
 [ext_resource type="Texture2D" uid="uid://ca4tskxn2vkoa" path="res://Sprites/DeadDwarfSnakePlantLayer1.png" id="37_5lh6v"]
-[ext_resource type="Texture2D" uid="uid://csfr7kpn7akp8" path="res://Sprites/DwarfWhiteIsopod.png" id="38_wulvh"]
-[ext_resource type="Texture2D" uid="uid://cag25o3stv2ae" path="res://Sprites/GreenhouseMillipede.png" id="39_tttab"]
-[ext_resource type="Texture2D" uid="uid://cv8wyexcqoac3" path="res://Sprites/MicroLandSnail.png" id="40_1hugj"]
+[ext_resource type="PackedScene" uid="uid://b5jcs0qh5sgu6" path="res://Scenes/small_animal.tscn" id="38_5c7gv"]
+[ext_resource type="PackedScene" uid="uid://bnik1op25tntb" path="res://Scenes/crab.tscn" id="39_l7aud"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2vvt5"]
-atlas = ExtResource("38_wulvh")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcfwk"]
+size = Vector2(26, 12)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qeg3k"]
-atlas = ExtResource("38_wulvh")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6e3rv"]
+b = Vector2(0, 266)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4bd3a"]
-atlas = ExtResource("38_wulvh")
-region = Rect2(0, 8, 8, 8)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_p0jtj"]
+b = Vector2(28, 0)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dyeqw"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2vvt5")
-}],
-"loop": false,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qeg3k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4bd3a")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0ujfp"]
+b = Vector2(26, -56)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a8s5b"]
-atlas = ExtResource("39_tttab")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_20xtg"]
+b = Vector2(48, -17)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wk7bi"]
-atlas = ExtResource("39_tttab")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4poip"]
+b = Vector2(65, -33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0rbpd"]
-atlas = ExtResource("39_tttab")
-region = Rect2(0, 16, 16, 16)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_af186"]
+b = Vector2(25, -45)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_il23e"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a8s5b")
-}],
-"loop": false,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wk7bi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0rbpd")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_htw40"]
+b = Vector2(0, -116)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hrn21"]
-atlas = ExtResource("40_1hugj")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j54y6"]
-atlas = ExtResource("40_1hugj")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vxf5w"]
-atlas = ExtResource("40_1hugj")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0467e"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hrn21")
-}],
-"loop": false,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j54y6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vxf5w")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uflv2"]
+b = Vector2(-192, 0)
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
+
+[node name="TopOfVine" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopOfVine"]
+position = Vector2(15, 5)
+shape = SubResource("RectangleShape2D_tcfwk")
+
+[node name="PlayArea" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(96, -95)
+shape = SubResource("SegmentShape2D_6e3rv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(68, -96)
+shape = SubResource("SegmentShape2D_p0jtj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(42, -40)
+shape = SubResource("SegmentShape2D_0ujfp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(-6, -23)
+shape = SubResource("SegmentShape2D_20xtg")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(-71, 10)
+shape = SubResource("SegmentShape2D_4poip")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(-96, 55)
+shape = SubResource("SegmentShape2D_af186")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(-96, 171)
+shape = SubResource("SegmentShape2D_htw40")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(96, 171)
+shape = SubResource("SegmentShape2D_uflv2")
 
 [node name="EmptyAquarium" type="Sprite2D" parent="."]
+position = Vector2(18, -306)
 texture = ExtResource("1_xrdet")
+offset = Vector2(-18, 306)
 
 [node name="Moss" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="MossLayer0" type="Sprite2D" parent="Moss"]
+position = Vector2(-1, -250)
 texture = ExtResource("2_ruou6")
+offset = Vector2(1, 250)
 
 [node name="MossLayer1" type="Sprite2D" parent="Moss"]
+position = Vector2(5, -250)
 texture = ExtResource("3_vehcd")
+offset = Vector2(-5, 250)
 
 [node name="MossLayer2" type="Sprite2D" parent="Moss"]
+position = Vector2(1, -250)
 texture = ExtResource("4_e18b1")
+offset = Vector2(-1, 250)
 
 [node name="MossLayer3" type="Sprite2D" parent="Moss"]
+position = Vector2(5, -250)
 texture = ExtResource("5_3ie40")
+offset = Vector2(-5, 250)
 
 [node name="DeadMossLayer0" type="Sprite2D" parent="Moss"]
 visible = false
+position = Vector2(2, -250)
 texture = ExtResource("6_nh36g")
+offset = Vector2(-2, 250)
 
 [node name="DeadMossLayer1" type="Sprite2D" parent="Moss"]
 visible = false
+position = Vector2(4, -250)
 texture = ExtResource("7_nvhex")
+offset = Vector2(-4, 250)
 
 [node name="DeadMossLayer2" type="Sprite2D" parent="Moss"]
 visible = false
+position = Vector2(4, -250)
 texture = ExtResource("8_fsmrh")
+offset = Vector2(-4, 250)
 
 [node name="DeadMossLayer3" type="Sprite2D" parent="Moss"]
 visible = false
+position = Vector2(4, -250)
 texture = ExtResource("9_3ld8g")
+offset = Vector2(-4, 250)
 
 [node name="Fern" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="FernLayer0" type="Sprite2D" parent="Fern"]
+position = Vector2(0, -240)
 texture = ExtResource("6_eofww")
+offset = Vector2(0, 240)
 
 [node name="FernLayer1" type="Sprite2D" parent="Fern"]
+position = Vector2(1, -240)
 texture = ExtResource("7_4r6ov")
+offset = Vector2(-1, 240)
 
 [node name="FernLayer2" type="Sprite2D" parent="Fern"]
+position = Vector2(1, -240)
 texture = ExtResource("8_8gil5")
+offset = Vector2(-1, 240)
 
 [node name="FernLayer3" type="Sprite2D" parent="Fern"]
+position = Vector2(4, -240)
 texture = ExtResource("9_vb0b0")
+offset = Vector2(-4, 240)
 
 [node name="DeadFernLayer0" type="Sprite2D" parent="Fern"]
 visible = false
+position = Vector2(-4, -240)
 texture = ExtResource("14_rku4e")
+offset = Vector2(4, 240)
 
 [node name="DeadFernLayer1" type="Sprite2D" parent="Fern"]
 visible = false
+position = Vector2(-2, -240)
 texture = ExtResource("15_h0pof")
+offset = Vector2(2, 240)
 
 [node name="DeadFernLayer2" type="Sprite2D" parent="Fern"]
 visible = false
+position = Vector2(-1, -240)
 texture = ExtResource("16_bwj8b")
+offset = Vector2(1, 240)
 
 [node name="DeadFernLayer3" type="Sprite2D" parent="Fern"]
 visible = false
+position = Vector2(1, -240)
 texture = ExtResource("17_0x0v8")
+offset = Vector2(-1, 240)
 
 [node name="PileaGlauca" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="PileaGlaucaLayer0" type="Sprite2D" parent="PileaGlauca"]
+position = Vector2(7, -230)
 texture = ExtResource("10_8s1kx")
+offset = Vector2(-7, 230)
 
 [node name="PileaGlaucaLayer1" type="Sprite2D" parent="PileaGlauca"]
+position = Vector2(-3, -230)
 texture = ExtResource("11_obj0d")
+offset = Vector2(3, 230)
 
 [node name="PileaGlaucaLayer2" type="Sprite2D" parent="PileaGlauca"]
+position = Vector2(1, -230)
 texture = ExtResource("12_vfrko")
+offset = Vector2(-1, 230)
 
 [node name="PileaGlaucaLayer3" type="Sprite2D" parent="PileaGlauca"]
+position = Vector2(6, -230)
 texture = ExtResource("13_shpb2")
+offset = Vector2(-6, 230)
 
 [node name="DeadPileaGlaucaLayer0" type="Sprite2D" parent="PileaGlauca"]
 visible = false
+position = Vector2(1, -230)
 texture = ExtResource("22_llrj2")
+offset = Vector2(-1, 230)
 
 [node name="DeadPileaGlaucaLayer1" type="Sprite2D" parent="PileaGlauca"]
 visible = false
+position = Vector2(1, -230)
 texture = ExtResource("23_osepx")
+offset = Vector2(-1, 230)
 
 [node name="DeadPileaGlaucaLayer2" type="Sprite2D" parent="PileaGlauca"]
 visible = false
+position = Vector2(-2, -230)
 texture = ExtResource("24_bjvei")
+offset = Vector2(2, 230)
 
 [node name="DeadPileaGlaucaLayer3" type="Sprite2D" parent="PileaGlauca"]
 visible = false
+position = Vector2(-2, -230)
 texture = ExtResource("25_dvqcb")
+offset = Vector2(2, 230)
 
 [node name="Orchid" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="OrchidLayer0" type="Sprite2D" parent="Orchid"]
+position = Vector2(39, -26)
 texture = ExtResource("14_siq48")
+offset = Vector2(-39, 26)
 
 [node name="OrchidLayer1" type="Sprite2D" parent="Orchid"]
+position = Vector2(-50, 59)
 texture = ExtResource("15_c1jxx")
+offset = Vector2(50, -59)
 
 [node name="DeadOrchidLayer0" type="Sprite2D" parent="Orchid"]
 visible = false
+position = Vector2(41, -25)
 texture = ExtResource("28_1c066")
+offset = Vector2(-41, 25)
 
 [node name="DeadOrchidLayer1" type="Sprite2D" parent="Orchid"]
 visible = false
+position = Vector2(-49, 74)
 texture = ExtResource("29_hle1v")
+offset = Vector2(49, -74)
 
 [node name="Pothos" type="Node2D" parent="."]
 modulate = Color(0.921569, 0.921569, 0.937255, 1)
+y_sort_enabled = true
 
 [node name="PothosLayer0" type="Sprite2D" parent="Pothos"]
+position = Vector2(-1, 196)
 texture = ExtResource("16_nkfi0")
+offset = Vector2(1, -196)
 
 [node name="PothosLayer1" type="Sprite2D" parent="Pothos"]
+position = Vector2(0, 198)
 texture = ExtResource("17_opq4i")
+offset = Vector2(0, -198)
 
 [node name="DeadPothosLayer0" type="Sprite2D" parent="Pothos"]
 visible = false
+position = Vector2(-4, 196)
 texture = ExtResource("32_i2j7m")
+offset = Vector2(4, -196)
 
 [node name="DeadPothosLayer1" type="Sprite2D" parent="Pothos"]
 visible = false
+position = Vector2(0, 198)
 texture = ExtResource("33_7rynf")
+offset = Vector2(0, -198)
 
 [node name="DwarfSnakePlant" type="Node2D" parent="."]
+z_index = 1
+y_sort_enabled = true
 
 [node name="DwarfSnakePlantLayer0" type="Sprite2D" parent="DwarfSnakePlant"]
+position = Vector2(3, 239)
 texture = ExtResource("18_8as0l")
+offset = Vector2(-3, -239)
 
 [node name="DwarfSnakePlantLayer1" type="Sprite2D" parent="DwarfSnakePlant"]
+position = Vector2(-2, 242)
 texture = ExtResource("19_yps2x")
+offset = Vector2(2, -242)
 
 [node name="DeadDwarfSnakePlantLayer0" type="Sprite2D" parent="DwarfSnakePlant"]
 visible = false
+position = Vector2(-3, 239)
 texture = ExtResource("36_r8coi")
+offset = Vector2(3, -239)
 
 [node name="DeadDwarfSnakePlantLayer1" type="Sprite2D" parent="DwarfSnakePlant"]
 visible = false
+position = Vector2(4, 242)
 texture = ExtResource("37_5lh6v")
+offset = Vector2(-4, -242)
 
-[node name="DwarfWhiteIsopod" type="AnimatedSprite2D" parent="."]
-position = Vector2(6, 138)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_dyeqw")
-autoplay = "default"
-frame_progress = 0.489919
+[node name="Animals" type="Node2D" parent="."]
+y_sort_enabled = true
 
-[node name="GreenhouseMillipede" type="AnimatedSprite2D" parent="."]
-position = Vector2(21, 112)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_il23e")
-autoplay = "default"
-frame_progress = 0.963447
+[node name="SmallAnimals" type="Node2D" parent="Animals"]
 
-[node name="MicroLandSnail" type="AnimatedSprite2D" parent="."]
-position = Vector2(-20, 96)
-sprite_frames = SubResource("SpriteFrames_0467e")
-autoplay = "default"
-frame_progress = 0.589921
+[node name="SmallAnimal" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
+position = Vector2(53, 2)
+selected_creature = "micro_land_snail"
+
+[node name="SmallAnimal2" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
+position = Vector2(-15, 88)
+
+[node name="SmallAnimal3" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
+position = Vector2(43, 49)
+selected_creature = "greenhouse_millipede"
+
+[node name="LargeAnimals" type="Node2D" parent="Animals"]
+y_sort_enabled = true
+
+[node name="Crab" parent="Animals/LargeAnimals" instance=ExtResource("39_l7aud")]
+position = Vector2(7, 49)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-143, 45)
+zoom = Vector2(2, 2)
+
+[connection signal="area_exited" from="TopOfVine" to="Animals/SmallAnimals/SmallAnimal" method="_on_top_of_vine_area_exited"]
