@@ -1,9 +1,13 @@
 extends  Node2D
 
+@onready var main = get_tree().get_first_node_in_group("Main")
+
 @export var move_speed := 25
 @onready var way = $Way
 @onready var gecko_animation = $GeckoAnimation
 
+var hunger = 10
+var nutrition = 20
 
 var walk = false
 
@@ -35,7 +39,7 @@ func _on_timer_timeout():
 	var angle_deg = randi_range(0, 359)
 	var angle_rad = deg_to_rad(angle_deg)
 	way.rotation = angle_rad
-	$Timer.wait_time = randf_range(3, 10)
+	$Timer.wait_time = randf_range(3, 5)
 	$Timer.start()
 
 
@@ -49,3 +53,25 @@ func _on_area_2d_area_entered(area):
 
 func _on_area_2d_area_exited(area):
 	z_index = 0
+
+func cycle():
+	hunger -= 1
+	if hunger == 0:
+		$Timer.stop()
+		walk = false
+		gecko_animation.play("eat")
+		hunger = 10
+		main.eat_small_animal()
+		if main.found_food:
+			main.fertilizer += nutrition
+		else:
+			main.big_animal_present = null
+			queue_free()
+		
+
+
+
+func _on_gecko_animation_animation_finished():
+	if gecko_animation.animation == "eat":
+		$Timer.start()
+		gecko_animation.play("stay")

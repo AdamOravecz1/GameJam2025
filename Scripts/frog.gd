@@ -1,8 +1,13 @@
 extends Node2D
 
+@onready var main = get_tree().get_first_node_in_group("Main")
+
 @onready var frog_animation = $FrogAnimation
 @onready var way = $Way
 @export var move_speed := 100
+
+var hunger = 20
+var nutrition = 40
 
 var direction = 1
 var jump = false
@@ -42,7 +47,9 @@ func _on_timer_timeout():
 	$Timer.start()
 
 func _on_frog_animation_animation_finished():
-	print("finished")
+	if frog_animation.animation == "eat":
+		$Timer.start()
+		frog_animation.play("stay")
 	jump = false
 	frog_animation.play("stay")
 
@@ -57,3 +64,18 @@ func _on_area_2d_area_entered(area):
 
 func _on_area_2d_area_exited(area):
 	z_index = 0
+	
+func cycle():
+	hunger -= 1
+	if hunger == 0:
+		$Timer.stop()
+		jump = false
+		frog_animation.play("eat")
+		hunger = 20
+		main.eat_small_animal()
+		if main.found_food:
+			main.fertilizer += nutrition
+		else:
+			main.big_animal_present = null
+			queue_free()
+		

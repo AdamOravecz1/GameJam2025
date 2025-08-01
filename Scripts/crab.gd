@@ -1,9 +1,14 @@
 extends Node2D
 
+@onready var main = get_tree().get_first_node_in_group("Main")
+
 @export var move_speed := 5  # Pixels per second
 @onready var way = $Way
 
 @onready var crab = $Crab
+
+var hunger = 30
+var nutrition = 60
 
 var walk = true
 
@@ -44,3 +49,23 @@ func _on_timer_timeout():
 
 func _on_size_body_entered(body):
 	way.rotation += deg_to_rad(180)
+	
+func cycle():
+	hunger -= 1
+	if hunger == 0:
+		$Timer.stop()
+		crab.play("eat")
+		walk = false
+		hunger = 30
+		main.eat_small_animal()
+		if main.found_food:
+			main.fertilizer += nutrition
+		else:
+			main.big_animal_present = null
+			queue_free()
+
+
+func _on_crab_animation_finished():
+	if crab.animation == "eat":
+		$Timer.start()
+		crab.play("stay")

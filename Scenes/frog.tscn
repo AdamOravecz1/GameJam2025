@@ -43,7 +43,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ei1eh")
 }],
-"loop": true,
+"loop": false,
 "name": &"eat",
 "speed": 5.0
 }, {
@@ -78,7 +78,7 @@ script = ExtResource("1_3jgku")
 
 [node name="FrogAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_822sl")
-animation = &"jump"
+animation = &"eat"
 autoplay = "stay"
 flip_h = true
 

@@ -5,7 +5,9 @@ var frog := preload("res://Scenes/frog.tscn")
 var crab := preload("res://Scenes/crab.tscn")
 var gecko := preload("res://Scenes/gecko.tscn")
 
-var meat = 0
+var found_food = false
+var type_to_eat = 0
+var big_animal_present = null
 var plant_material = 0.0
 var fertilizer = 30
 var restart_game = true
@@ -20,7 +22,7 @@ var moss = {
 	"rot_rate" = -10,
 	"hunger" = 1.0,
 	"number" = 4,
-	"nutrition" = 10.0
+	"nutrition" = 5.0
 }
 
 var fern = {
@@ -46,7 +48,7 @@ var pilea_glauca = {
 	"rot_rate" = -5,
 	"hunger" = 0.5,
 	"number" = 4,
-	"nutrition" = 5.0
+	"nutrition" = 10.0
 }
 
 var orchid = {
@@ -59,7 +61,7 @@ var orchid = {
 	"rot_rate" = -10,
 	"hunger" = 1.0,
 	"number" = 2,
-	"nutrition" = 12.0
+	"nutrition" = 19.0
 }
 var pothos = {
 	"name" = "Pothos",
@@ -84,7 +86,7 @@ var dwarf_snake_plant = {
 	"rot_rate" = -20,
 	"hunger" = 2.0,
 	"number" = 2,
-	"nutrition" = 19.0
+	"nutrition" = 12.0
 }
 
 var plants = [moss, fern, pilea_glauca, orchid, dwarf_snake_plant, pothos]
@@ -93,21 +95,24 @@ var isopod = {
 	"name" = "Isopod",
 	"health" = 20,
 	"eats" = 30.0,
-	"nutrition" = 1.0
+	"nutrition" = 1.0,
+	"hunger_sensitivity" = 1
 }
 
 var millipede = {
 	"name" = "Millipede",
 	"health" = 30,
-	"eats" = 50.0,
-	"nutrition" = 2.0
+	"eats" = 40.0,
+	"nutrition" = 2.0,
+	"hunger_sensitivity" = 2
 }
 
 var snail = {
 	"name" = "Snail",
 	"health" = 40,
-	"eats" = 70.0,
-	"nutrition" = 3.0
+	"eats" = 50.0,
+	"nutrition" = 3.0,
+	"hunger_sensitivity" = 3
 }
 
 var small_animals = {
@@ -186,27 +191,31 @@ func _on_snail_pressed():
 	add_small_animal("micro_land_snail")
 
 func _on_frog_pressed():
-	var animal := frog.instantiate()
-	var rand_x = randi_range(-40, 70)
-	var rand_y = randi_range(25, 100)
-	animal.position = Vector2(rand_x, rand_y)
-	$Animals/Frog.add_child(animal)
-
+	if big_animal_present == null:
+		var animal := frog.instantiate()
+		var rand_x = randi_range(-40, 70)
+		var rand_y = randi_range(25, 100)
+		animal.position = Vector2(rand_x, rand_y)
+		$Animals/Frog.add_child(animal)
+		big_animal_present = animal
 
 func _on_crab_pressed():
-	var animal := crab.instantiate()
-	var rand_x = randi_range(-40, 70)
-	var rand_y = randi_range(25, 100)
-	animal.position = Vector2(rand_x, rand_y)
-	$Animals/Crab.add_child(animal)
-
+	if big_animal_present == null:
+		var animal := crab.instantiate()
+		var rand_x = randi_range(-40, 70)
+		var rand_y = randi_range(25, 100)
+		animal.position = Vector2(rand_x, rand_y)
+		$Animals/Crab.add_child(animal)
+		big_animal_present = animal
 
 func _on_gecko_pressed():
-	var animal := gecko.instantiate()
-	var rand_x = randi_range(-40, 70)
-	var rand_y = randi_range(25, 100)
-	animal.position = Vector2(rand_x, rand_y)
-	$Animals/Gecko.add_child(animal)
+	if big_animal_present == null:
+		var animal := gecko.instantiate()
+		var rand_x = randi_range(-40, 70)
+		var rand_y = randi_range(25, 100)
+		animal.position = Vector2(rand_x, rand_y)
+		$Animals/Gecko.add_child(animal)
+		big_animal_present = animal
 	
 func add_small_animal(name):
 	var small_animal := small_animal_scene.instantiate()
@@ -219,6 +228,7 @@ func add_small_animal(name):
 	small_animal.health = small_animals[parts[-1]]["health"]
 	small_animal.hunger = small_animals[parts[-1]]["eats"]
 	small_animal.nutrition = small_animals[parts[-1]]["nutrition"]
+	small_animal.hunger_sensitive = small_animals[parts[-1]]["hunger_sensitivity"]
 	
 	var category = parts[-1].capitalize()
 	
@@ -232,15 +242,16 @@ func add_small_animal(name):
 
 func _on_timer_timeout():
 	restart_game = true
-	small_animal_cycle()
-	plant_loop(moss)
-	plant_loop(fern)
 	plant_loop(pilea_glauca)
+	plant_loop(fern)
+	plant_loop(moss)
 	plant_loop(orchid)
 	plant_loop(pothos)
 	plant_loop(dwarf_snake_plant)
-	#print("fertilizer: ", fertilizer)
-	print("plant_material: ", plant_material)
+	small_animal_cycle()
+	big_animal_cycle()
+	print("fertilizer: ", fertilizer)
+	#print("plant_material: ", plant_material)
 	if restart_game:
 		plant_material = 0
 		fertilizer = 30
@@ -303,13 +314,42 @@ func small_animal_cycle():
 
 	for i in range(max_len):
 		restart_game = false
-		if i < isopods.size():
-			isopods[i].cycle()
-		if i < millipedes.size():
-			millipedes[i].cycle()
 		if i < snails.size():
 			snails[i].cycle()
+		if i < millipedes.size():
+			millipedes[i].cycle()
+		if i < isopods.size():
+			isopods[i].cycle()
+			
+func big_animal_cycle():
+	if big_animal_present:
+		restart_game = false
+		big_animal_present.cycle()
+		
+func eat_small_animal():
+	var tried = 0
+	found_food = false
+	while tried < 3 and not found_food:
+		var current_type = (type_to_eat + tried) % 3
+		match current_type:
+			0:
+				if $Animals/Isopod.get_child_count() > 0:
+					$Animals/Isopod.get_child(0).queue_free()
+					print("iso")
+					found_food = true
+			1:
+				if $Animals/Millipede.get_child_count() > 0:
+					$Animals/Millipede.get_child(0).queue_free()
+					print("milli")
+					found_food = true
+			2:
+				if $Animals/Snail.get_child_count() > 0:
+					$Animals/Snail.get_child(0).queue_free()
+					print("snail")
+					found_food = true
+		tried += 1
 
+	type_to_eat += 1
 
 func _on_food_pressed():
 	fertilizer += 15

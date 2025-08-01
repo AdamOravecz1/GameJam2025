@@ -7,6 +7,7 @@ var hunger = 0
 var nutrition = 0
 var alive = true
 var compost_counter = 5
+var hunger_sensitive = 0
 
 @export var move_speed := 5  # Pixels per second
 
@@ -93,11 +94,11 @@ func _on_area_2d_area_exited(area):
 func cycle():
 	if health > 0:
 		health -= 1
-		print(hunger, ", ", main.plant_material, ", ")
 		if main.plant_material >= hunger:
-			print("szaporod")
 			main.plant_material -= hunger
 			main.add_small_animal(selected_creature)
+		else:
+			health -= hunger_sensitive
 	else:
 		if compost_counter == 0:
 			main.fertilizer += nutrition

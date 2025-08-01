@@ -109,7 +109,7 @@ script = ExtResource("1_fxo6y")
 
 [node name="GeckoAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b02es")
-animation = &"walk"
+animation = &"eat"
 autoplay = "stay"
 
 [node name="Way" type="RayCast2D" parent="."]
