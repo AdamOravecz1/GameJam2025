@@ -6,8 +6,9 @@ var crab := preload("res://Scenes/crab.tscn")
 var gecko := preload("res://Scenes/gecko.tscn")
 
 var meat = 0
-var plant = 0
-var fertilizer = 0
+var plant_material = 0.0
+var fertilizer = 30
+var restart_game = true
 
 var moss = {
 	"name" = "Moss",
@@ -18,7 +19,8 @@ var moss = {
 	"growing_strength" = 1.0,
 	"rot_rate" = -10,
 	"hunger" = 1.0,
-	"number" = 4
+	"number" = 4,
+	"nutrition" = 10.0
 }
 
 var fern = {
@@ -30,7 +32,8 @@ var fern = {
 	"growing_strength" = 0.7,
 	"rot_rate" = -8,
 	"hunger" = 0.7,
-	"number" = 4
+	"number" = 4,
+	"nutrition" = 7.0
 }
 
 var pilea_glauca = {
@@ -42,7 +45,8 @@ var pilea_glauca = {
 	"growing_strength" = 0.5,
 	"rot_rate" = -5,
 	"hunger" = 0.5,
-	"number" = 4
+	"number" = 4,
+	"nutrition" = 5.0
 }
 
 var orchid = {
@@ -54,10 +58,11 @@ var orchid = {
 	"growing_strength" = 0.5,
 	"rot_rate" = -10,
 	"hunger" = 1.0,
-	"number" = 2
+	"number" = 2,
+	"nutrition" = 12.0
 }
-var dwarf_snake_plant = {
-	"name" = "DwarfSnakePlant",
+var pothos = {
+	"name" = "Pothos",
 	"live" = 0,
 	"dead" = 0,
 	"status" = 0,
@@ -65,11 +70,12 @@ var dwarf_snake_plant = {
 	"growing_strength" = 0.8,
 	"rot_rate" = -15,
 	"hunger" = 1.5,
-	"number" = 2
+	"number" = 2,
+	"nutrition" = 15.0
 }
 
-var pothos = {
-	"name" = "Pothos",
+var dwarf_snake_plant = {
+	"name" = "DwarfSnakePlant",
 	"live" = 0,
 	"dead" = 0,
 	"status" = 0,
@@ -77,7 +83,37 @@ var pothos = {
 	"growing_strength" = 1.0,
 	"rot_rate" = -20,
 	"hunger" = 2.0,
-	"number" = 2
+	"number" = 2,
+	"nutrition" = 19.0
+}
+
+var plants = [moss, fern, pilea_glauca, orchid, dwarf_snake_plant, pothos]
+
+var isopod = {
+	"name" = "Isopod",
+	"health" = 20,
+	"eats" = 30.0,
+	"nutrition" = 1.0
+}
+
+var millipede = {
+	"name" = "Millipede",
+	"health" = 30,
+	"eats" = 50.0,
+	"nutrition" = 2.0
+}
+
+var snail = {
+	"name" = "Snail",
+	"health" = 40,
+	"eats" = 70.0,
+	"nutrition" = 3.0
+}
+
+var small_animals = {
+	"isopod" = isopod,
+	"millipede" = millipede,
+	"snail" = snail
 }
 
 func _on_moss_button_pressed():
@@ -130,7 +166,6 @@ func _on_pothos_button_pressed():
 
 		pothos["showing"] += 1
 
-
 func _on_dwarf_snake_plant_button_pressed():
 	if dwarf_snake_plant["live"] < 2:
 		if dwarf_snake_plant["dead"] > 0:
@@ -140,7 +175,6 @@ func _on_dwarf_snake_plant_button_pressed():
 		$DwarfSnakePlant.get_children()[dwarf_snake_plant["showing"] + 2].hide()
 
 		dwarf_snake_plant["showing"] += 1
-
 
 func _on_isopod_pressed():
 	add_small_animal("dwarf_white_isopod")
@@ -180,10 +214,16 @@ func add_small_animal(name):
 	var rand_x = randi_range(-50, 50)
 	var rand_y = randi_range(0, 100)
 	small_animal.position = Vector2(rand_x, rand_y)
+
 	var parts = name.split("_")
+	small_animal.health = small_animals[parts[-1]]["health"]
+	small_animal.hunger = small_animals[parts[-1]]["eats"]
+	small_animal.nutrition = small_animals[parts[-1]]["nutrition"]
+	
 	var category = parts[-1].capitalize()
 	
 	var parent_node = $Animals.get_node_or_null(category)
+	
 	if parent_node:
 		parent_node.add_child(small_animal)
 	else:
@@ -191,18 +231,26 @@ func add_small_animal(name):
 
 
 func _on_timer_timeout():
+	restart_game = true
+	small_animal_cycle()
 	plant_loop(moss)
 	plant_loop(fern)
 	plant_loop(pilea_glauca)
 	plant_loop(orchid)
 	plant_loop(pothos)
 	plant_loop(dwarf_snake_plant)
-	print("fertilizer: ", fertilizer)
+	#print("fertilizer: ", fertilizer)
+	print("plant_material: ", plant_material)
+	if restart_game:
+		plant_material = 0
+		fertilizer = 30
 
 	
 func plant_loop(plant):
-	var hunger = plant["hunger"]*plant["live"] + plant["dead"]*(plant["hunger"]/4)
 	if plant["live"] > 0 or plant["dead"] > 0:
+		restart_game = false
+		plant_material += plant["live"] * plant["nutrition"]
+		var hunger = plant["hunger"]*plant["live"] + plant["dead"]*(plant["hunger"]/4)
 		var plant_node_name = plant["name"]
 		var plant_node = get_node(plant_node_name)
 		var children = plant_node.get_children()
@@ -238,12 +286,30 @@ func plant_loop(plant):
 			if plant["dead"] > 0:
 				children[plant["dead"] + plant["number"]-1].hide()
 				plant["dead"] -= 1
-	print(plant["name"])
-	print("live: ", plant["live"])
-	print("dead: ", plant["dead"])
-	print("showing: ", plant["showing"])
-	print("status: ", plant["status"])
-	print("--------------")
+		
+	#print(plant["name"])
+	#print("live: ", plant["live"])
+	#print("dead: ", plant["dead"])
+	#print("showing: ", plant["showing"])
+	#print("status: ", plant["status"])
+	#print("--------------")
+	
+func small_animal_cycle():
+	var isopods = $Animals/Isopod.get_children()
+	var millipedes = $Animals/Millipede.get_children()
+	var snails = $Animals/Snail.get_children()
+
+	var max_len = max(isopods.size(), millipedes.size(), snails.size())
+
+	for i in range(max_len):
+		restart_game = false
+		if i < isopods.size():
+			isopods[i].cycle()
+		if i < millipedes.size():
+			millipedes[i].cycle()
+		if i < snails.size():
+			snails[i].cycle()
+
 
 func _on_food_pressed():
 	fertilizer += 15

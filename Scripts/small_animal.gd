@@ -2,12 +2,20 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 
+var health = 0
+var hunger = 0
+var nutrition = 0
+var alive = true
+var compost_counter = 5
+
 @export var move_speed := 5  # Pixels per second
 
 @onready var dwarf_white_isopod = $DwarfWhiteIsopod
 @onready var greenhouse_millipede = $GreenhouseMillipede
 @onready var micro_land_snail = $MicroLandSnail
 @onready var way = $Way
+
+@onready var main = get_tree().get_first_node_in_group("Main")
 
 @export_enum("dwarf_white_isopod", "greenhouse_millipede", "micro_land_snail")
 var selected_creature: String = "dwarf_white_isopod":
@@ -26,28 +34,29 @@ func _ready():
 	way.rotation = angle_rad
 	
 func _process(delta):
-	if way.is_colliding():
-		way.rotation += deg_to_rad(180)
-	var global_target_pos = way.global_position + way.transform.x * way.target_position.length()
-	
-	var direction = (global_target_pos - global_position).normalized()
-	var movement = direction * move_speed * delta
-	if movement.x < 0:
-		dwarf_white_isopod.flip_h = true
-		greenhouse_millipede.flip_h = true
-		micro_land_snail.flip_h = true
-	else:
-		dwarf_white_isopod.flip_h = false
-		greenhouse_millipede.flip_h = false
-		micro_land_snail.flip_h = false
-	if movement.y > 0:
-		greenhouse_millipede.flip_v = true
-		dwarf_white_isopod.flip_v = true
-	else:
-		greenhouse_millipede.flip_v = false
-		dwarf_white_isopod.flip_v = false
-	
-	position += movement
+	if alive:
+		if way.is_colliding():
+			way.rotation += deg_to_rad(180)
+		var global_target_pos = way.global_position + way.transform.x * way.target_position.length()
+		
+		var direction = (global_target_pos - global_position).normalized()
+		var movement = direction * move_speed * delta
+		if movement.x < 0:
+			dwarf_white_isopod.flip_h = true
+			greenhouse_millipede.flip_h = true
+			micro_land_snail.flip_h = true
+		else:
+			dwarf_white_isopod.flip_h = false
+			greenhouse_millipede.flip_h = false
+			micro_land_snail.flip_h = false
+		if movement.y > 0:
+			greenhouse_millipede.flip_v = true
+			dwarf_white_isopod.flip_v = true
+		else:
+			greenhouse_millipede.flip_v = false
+			dwarf_white_isopod.flip_v = false
+		
+		position += movement
 
 func _update_visibility():
 	# Make sure nodes are ready
@@ -80,3 +89,25 @@ func _on_area_2d_area_entered(area):
 
 func _on_area_2d_area_exited(area):
 	z_index = 0
+	
+func cycle():
+	if health > 0:
+		health -= 1
+		print(hunger, ", ", main.plant_material, ", ")
+		if main.plant_material >= hunger:
+			print("szaporod")
+			main.plant_material -= hunger
+			main.add_small_animal(selected_creature)
+	else:
+		if compost_counter == 0:
+			main.fertilizer += nutrition
+			queue_free()
+		compost_counter -= 1
+		triger_death()
+
+	
+func triger_death():
+	alive = false
+	dwarf_white_isopod.play("dead")
+	greenhouse_millipede.play("dead")
+	micro_land_snail.play("dead")

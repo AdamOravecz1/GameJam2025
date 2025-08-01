@@ -68,7 +68,7 @@ b = Vector2(0, -116)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_uflv2"]
 b = Vector2(-192, 0)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["Main"]]
 y_sort_enabled = true
 script = ExtResource("1_u4m1k")
 
@@ -382,7 +382,7 @@ z_index = 100
 texture = ExtResource("41_go4eq")
 
 [node name="Buttons" type="Node2D" parent="."]
-position = Vector2(-424, 0)
+position = Vector2(-379, 0)
 
 [node name="SmallPlants" type="Node2D" parent="Buttons"]
 
@@ -416,9 +416,9 @@ position = Vector2(55, 0)
 
 [node name="OrchidButton" type="Button" parent="Buttons/LargePlants"]
 custom_minimum_size = Vector2(50, 50)
-offset_top = -55.0
+offset_top = 55.0
 offset_right = 50.0
-offset_bottom = -5.0
+offset_bottom = 105.0
 theme = ExtResource("40_kiocg")
 text = "Orchid"
 
@@ -433,9 +433,9 @@ clip_text = true
 
 [node name="DwarfSnakePlantButton" type="Button" parent="Buttons/LargePlants"]
 custom_minimum_size = Vector2(50, 50)
-offset_top = 55.0
+offset_top = -55.0
 offset_right = 50.0
-offset_bottom = 105.0
+offset_bottom = -5.0
 theme = ExtResource("40_kiocg")
 text = "Dwarf
 Snake
