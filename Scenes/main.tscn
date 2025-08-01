@@ -507,16 +507,28 @@ theme = ExtResource("40_kiocg")
 text = " Gecko"
 alignment = 0
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="food" type="Button" parent="."]
+offset_left = -323.0
+offset_top = 150.0
+offset_right = -279.0
+offset_bottom = 181.0
+text = "food"
+
 [connection signal="pressed" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_pressed"]
 [connection signal="pressed" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_pressed"]
 [connection signal="pressed" from="Buttons/SmallPlants/PileaGlaucaButton" to="." method="_on_pilea_glauca_button_pressed"]
 [connection signal="pressed" from="Buttons/LargePlants/OrchidButton" to="." method="_on_orchid_button_pressed"]
 [connection signal="pressed" from="Buttons/LargePlants/PothosButton" to="." method="_on_pothos_button_pressed"]
 [connection signal="pressed" from="Buttons/LargePlants/DwarfSnakePlantButton" to="." method="_on_dwarf_snake_plant_button_pressed"]
-[connection signal="pressed" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopode_pressed"]
 [connection signal="pressed" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopod_pressed"]
+[connection signal="pressed" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopode_pressed"]
 [connection signal="pressed" from="Buttons/SmallAnimals/Millipede" to="." method="_on_millipede_pressed"]
 [connection signal="pressed" from="Buttons/SmallAnimals/Snail" to="." method="_on_snail_pressed"]
 [connection signal="pressed" from="Buttons/LargeAnimals/Frog" to="." method="_on_frog_pressed"]
 [connection signal="pressed" from="Buttons/LargeAnimals/Crab" to="." method="_on_crab_pressed"]
 [connection signal="pressed" from="Buttons/LargeAnimals/Gecko" to="." method="_on_gecko_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="food" to="." method="_on_food_pressed"]

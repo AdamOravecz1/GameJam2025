@@ -19,7 +19,7 @@ func _process(delta):
 	else:
 		move_speed = 100
 	if jump:
-		frog_animation.play("jump")
+		
 
 		# This is the correct direction — global, rotated from the frog
 		var dir = (way.to_global(way.target_position) - global_position).normalized()
@@ -36,11 +36,13 @@ func _on_timer_timeout():
 		_set_random_angle()
 	else:
 		jump = true
+		frog_animation.play("jump")
 
 	$Timer.wait_time = randf_range(3, 10)
 	$Timer.start()
 
 func _on_frog_animation_animation_finished():
+	print("finished")
 	jump = false
 	frog_animation.play("stay")
 

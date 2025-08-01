@@ -5,50 +5,142 @@ var frog := preload("res://Scenes/frog.tscn")
 var crab := preload("res://Scenes/crab.tscn")
 var gecko := preload("res://Scenes/gecko.tscn")
 
-var life = {
-	"moss" = 0,
-	"fern" = 0,
-	"pilea_glauca" = 0,
-	"orchid" = 0,
-	"pothos" = 0,
-	"dwarf_snake_plant" = 0,
-	"dwarf_white_isopod" = 0,
-	"greenhouse_millipede" = 0,
-	"micro_land_snail" = 0,
-	"frog" = 0,
-	"crab" = 0,
-	"geckko" = 0
+var meat = 0
+var plant = 0
+var fertilizer = 0
+
+var moss = {
+	"name" = "Moss",
+	"live" = 0,
+	"dead" = 0,
+	"status" = 0,
+	"showing" = 0.0,
+	"growing_strength" = 1.0,
+	"rot_rate" = -10,
+	"hunger" = 1.0,
+	"number" = 4
+}
+
+var fern = {
+	"name" = "Fern",
+	"live" = 0,
+	"dead" = 0,
+	"status" = 0,
+	"showing" = 0.0,
+	"growing_strength" = 0.7,
+	"rot_rate" = -8,
+	"hunger" = 0.7,
+	"number" = 4
+}
+
+var pilea_glauca = {
+	"name" = "PileaGlauca",
+	"live" = 0,
+	"dead" = 0,
+	"status" = 0,
+	"showing" = 0.0,
+	"growing_strength" = 0.5,
+	"rot_rate" = -5,
+	"hunger" = 0.5,
+	"number" = 4
+}
+
+var orchid = {
+	"name" = "Orchid",
+	"live" = 0,
+	"dead" = 0,
+	"status" = 0,
+	"showing" = 0.0,
+	"growing_strength" = 0.5,
+	"rot_rate" = -10,
+	"hunger" = 1.0,
+	"number" = 2
+}
+var dwarf_snake_plant = {
+	"name" = "DwarfSnakePlant",
+	"live" = 0,
+	"dead" = 0,
+	"status" = 0,
+	"showing" = 0.0,
+	"growing_strength" = 0.8,
+	"rot_rate" = -15,
+	"hunger" = 1.5,
+	"number" = 2
+}
+
+var pothos = {
+	"name" = "Pothos",
+	"live" = 0,
+	"dead" = 0,
+	"status" = 0,
+	"showing" = 0.0,
+	"growing_strength" = 1.0,
+	"rot_rate" = -20,
+	"hunger" = 2.0,
+	"number" = 2
 }
 
 func _on_moss_button_pressed():
-	if life["moss"] < 4:
-		life["moss"] += 1
-		$Moss.get_children()[life["moss"] - 1].show()
+	if moss["live"] < 4:
+		if moss["dead"] > 0:
+			moss["dead"] -= 1
+		moss["live"] += 1
+		$Moss.get_children()[moss["showing"]].show()
+		$Moss.get_children()[moss["showing"] + 4].hide()
+
+		moss["showing"] += 1
 
 func _on_fern_button_pressed():
-	if life["fern"] < 4:
-		life["fern"] += 1
-		$Fern.get_children()[life["fern"] - 1].show()
+	if fern["live"] < 4:
+		if fern["dead"] > 0:
+			fern["dead"] -= 1
+		fern["live"] += 1
+		$Fern.get_children()[fern["showing"]].show()
+		$Fern.get_children()[fern["showing"] + 4].hide()
+
+		fern["showing"] += 1
 
 func _on_pilea_glauca_button_pressed():
-	if life["pilea_glauca"] < 4:
-		life["pilea_glauca"] += 1
-		$PileaGlauca.get_children()[life["pilea_glauca"] - 1].show()
+	if pilea_glauca["live"] < 4:
+		if pilea_glauca["dead"] > 0:
+			pilea_glauca["dead"] -= 1
+		pilea_glauca["live"] += 1
+		$PileaGlauca.get_children()[pilea_glauca["showing"]].show()
+		$PileaGlauca.get_children()[pilea_glauca["showing"] + 4].hide()
+
+		pilea_glauca["showing"] += 1
 
 func _on_orchid_button_pressed():
-	if life["orchid"] < 2:
-		life["orchid"] += 1
-		$Orchid.get_children()[life["orchid"] - 1].show()
+	if orchid["live"] < 2:
+		if orchid["dead"] > 0:
+			orchid["dead"] -= 1
+		orchid["live"] += 1
+		$Orchid.get_children()[orchid["showing"]].show()
+		$Orchid.get_children()[orchid["showing"] + 2].hide()
+
+		orchid["showing"] += 1
 
 func _on_pothos_button_pressed():
-	if life["pothos"] < 2:
-		life["pothos"] += 1
-		$Pothos.get_children()[life["pothos"] - 1].show()
+	if pothos["live"] < 2:
+		if pothos["dead"] > 0:
+			pothos["dead"] -= 1
+		pothos["live"] += 1
+		$Pothos.get_children()[pothos["showing"]].show()
+		$Pothos.get_children()[pothos["showing"] + 2].hide()
+
+		pothos["showing"] += 1
+
 
 func _on_dwarf_snake_plant_button_pressed():
-	if life["dwarf_snake_plant"] < 2:
-		life["dwarf_snake_plant"] += 1
-		$DwarfSnakePlant.get_children()[life["dwarf_snake_plant"] - 1].show()
+	if dwarf_snake_plant["live"] < 2:
+		if dwarf_snake_plant["dead"] > 0:
+			dwarf_snake_plant["dead"] -= 1
+		dwarf_snake_plant["live"] += 1
+		$DwarfSnakePlant.get_children()[dwarf_snake_plant["showing"]].show()
+		$DwarfSnakePlant.get_children()[dwarf_snake_plant["showing"] + 2].hide()
+
+		dwarf_snake_plant["showing"] += 1
+
 
 func _on_isopod_pressed():
 	add_small_animal("dwarf_white_isopod")
@@ -65,7 +157,6 @@ func _on_frog_pressed():
 	var rand_y = randi_range(25, 100)
 	animal.position = Vector2(rand_x, rand_y)
 	$Animals/Frog.add_child(animal)
-	life["frog"] += 1
 
 
 func _on_crab_pressed():
@@ -74,7 +165,6 @@ func _on_crab_pressed():
 	var rand_y = randi_range(25, 100)
 	animal.position = Vector2(rand_x, rand_y)
 	$Animals/Crab.add_child(animal)
-	life["crab"] += 1
 
 
 func _on_gecko_pressed():
@@ -83,7 +173,6 @@ func _on_gecko_pressed():
 	var rand_y = randi_range(25, 100)
 	animal.position = Vector2(rand_x, rand_y)
 	$Animals/Gecko.add_child(animal)
-	life["gecko"] += 1
 	
 func add_small_animal(name):
 	var small_animal := small_animal_scene.instantiate()
@@ -100,5 +189,61 @@ func add_small_animal(name):
 	else:
 		push_error("No such category node: %s" % category)
 
-	life[name] += 1
 
+func _on_timer_timeout():
+	plant_loop(moss)
+	plant_loop(fern)
+	plant_loop(pilea_glauca)
+	plant_loop(orchid)
+	plant_loop(pothos)
+	plant_loop(dwarf_snake_plant)
+	print("fertilizer: ", fertilizer)
+
+	
+func plant_loop(plant):
+	var hunger = plant["hunger"]*plant["live"] + plant["dead"]*(plant["hunger"]/4)
+	if plant["live"] > 0 or plant["dead"] > 0:
+		var plant_node_name = plant["name"]
+		var plant_node = get_node(plant_node_name)
+		var children = plant_node.get_children()
+		if fertilizer >= hunger:
+			fertilizer -= hunger
+		if fertilizer <= hunger:
+			plant["status"] -= 1
+		else:
+			plant["status"] += plant["live"]*plant["growing_strength"] + plant["dead"]*(plant["growing_strength"]/2)
+		if plant["status"] >= 5:
+			if plant["live"] == plant["number"]:
+				plant["status"] = 5
+			else:
+				plant["status"] = 0
+			if plant["live"] < plant["number"]:
+				if plant["dead"] > 0:
+					plant["dead"] -= 1
+				plant["live"] += 1
+				children[plant["showing"]].show()
+				children[plant["showing"] + plant["number"]].hide()
+				plant["showing"] += 1
+		elif plant["status"] <= plant["rot_rate"]/2 and plant["live"] > 0:
+			if plant["dead"] != plant["number"]:
+				plant["status"] = 0
+			if plant["dead"] < plant["number"]:
+				plant["dead"] += 1
+				plant["live"] -= 1
+				plant["showing"] -= 1
+				children[plant["showing"]].hide()
+				children[plant["showing"] + plant["number"]].show()
+		if plant["status"] <= plant["rot_rate"]:
+			plant["status"] = 0
+			if plant["dead"] > 0:
+				children[plant["dead"] + plant["number"]-1].hide()
+				plant["dead"] -= 1
+	print(plant["name"])
+	print("live: ", plant["live"])
+	print("dead: ", plant["dead"])
+	print("showing: ", plant["showing"])
+	print("status: ", plant["status"])
+	print("--------------")
+
+func _on_food_pressed():
+	fertilizer += 15

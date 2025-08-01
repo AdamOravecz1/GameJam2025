@@ -78,7 +78,7 @@ script = ExtResource("1_3jgku")
 
 [node name="FrogAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_822sl")
-animation = &"stay"
+animation = &"jump"
 autoplay = "stay"
 flip_h = true
 
