@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://hxme3shh4xb6"]
+[gd_scene load_steps=51 format=3 uid="uid://hxme3shh4xb6"]
 
 [ext_resource type="Texture2D" uid="uid://ci286dfxxgitn" path="res://Sprites/EmptyAquarium.png" id="1_xrdet"]
 [ext_resource type="Texture2D" uid="uid://dmladlj1vegxh" path="res://Sprites/MossLayer0.png" id="2_ruou6"]
@@ -39,6 +39,8 @@
 [ext_resource type="Texture2D" uid="uid://ca4tskxn2vkoa" path="res://Sprites/DeadDwarfSnakePlantLayer1.png" id="37_5lh6v"]
 [ext_resource type="PackedScene" uid="uid://b5jcs0qh5sgu6" path="res://Scenes/small_animal.tscn" id="38_5c7gv"]
 [ext_resource type="PackedScene" uid="uid://bnik1op25tntb" path="res://Scenes/crab.tscn" id="39_l7aud"]
+[ext_resource type="PackedScene" uid="uid://bl8thy3s8ce6e" path="res://Scenes/frog.tscn" id="40_tc6q5"]
+[ext_resource type="Texture2D" uid="uid://cci3wssqi8s0u" path="res://Sprites/Stand.png" id="41_go4eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcfwk"]
 size = Vector2(26, 12)
@@ -345,20 +347,26 @@ position = Vector2(53, 2)
 selected_creature = "micro_land_snail"
 
 [node name="SmallAnimal2" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
-position = Vector2(-15, 88)
+position = Vector2(-22, 49)
+selected_creature = "greenhouse_millipede"
 
 [node name="SmallAnimal3" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
-position = Vector2(43, 49)
-selected_creature = "greenhouse_millipede"
 
 [node name="LargeAnimals" type="Node2D" parent="Animals"]
 y_sort_enabled = true
 
 [node name="Crab" parent="Animals/LargeAnimals" instance=ExtResource("39_l7aud")]
-position = Vector2(7, 49)
+position = Vector2(-348, 31)
+
+[node name="Frog" parent="Animals/LargeAnimals" instance=ExtResource("40_tc6q5")]
+position = Vector2(52, 25)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-143, 45)
 zoom = Vector2(2, 2)
+
+[node name="Stand" type="Sprite2D" parent="."]
+z_index = 100
+texture = ExtResource("41_go4eq")
 
 [connection signal="area_exited" from="TopOfVine" to="Animals/SmallAnimals/SmallAnimal" method="_on_top_of_vine_area_exited"]

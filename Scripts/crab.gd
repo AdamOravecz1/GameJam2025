@@ -4,8 +4,6 @@ extends Node2D
 @onready var way = $Way
 
 @onready var crab = $Crab
-@onready var frog = $Frog
-@onready var gecko = $Gecko
 
 var walk = true
 

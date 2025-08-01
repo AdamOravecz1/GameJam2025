@@ -1,5 +1,7 @@
 extends Node2D
 
+var rng = RandomNumberGenerator.new()
+
 @export var move_speed := 5  # Pixels per second
 
 @onready var dwarf_white_isopod = $DwarfWhiteIsopod
@@ -17,6 +19,7 @@ var selected_creature: String = "dwarf_white_isopod":
 			_update_visibility()
 
 func _ready():
+	rng.randomize()
 	_update_visibility()
 	var angle_deg = randi_range(0, 359)
 	var angle_rad = deg_to_rad(angle_deg)
@@ -64,8 +67,13 @@ func _on_timer_timeout():
 	var angle_deg = randi_range(0, 359)
 	var angle_rad = deg_to_rad(angle_deg)
 	way.rotation = angle_rad
-	await get_tree().create_timer(randf_range(3, 10))
-	$Timer.start()
+
+	# Create a new one-shot timer (avoids shared reference)
+	var new_timer = get_tree().create_timer(rng.randf_range(3, 10))
+	await new_timer.timeout
+
+	print("most")
+	$Timer.start()  # Restarts the original Timer (if needed)
 
 
 func _on_area_2d_area_entered(area):
