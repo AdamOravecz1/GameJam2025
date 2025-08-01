@@ -78,10 +78,8 @@ script = ExtResource("1_3jgku")
 
 [node name="FrogAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_822sl")
-animation = &"jump"
+animation = &"stay"
 autoplay = "stay"
-frame = 2
-frame_progress = 1.0
 flip_h = true
 
 [node name="Way" type="RayCast2D" parent="."]

@@ -9,7 +9,6 @@ var jump = false
 var stay = true
 
 func _ready():
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	randomize()
 	_set_random_angle()
 	$Timer.start()
@@ -38,8 +37,7 @@ func _on_timer_timeout():
 	else:
 		jump = true
 
-	# Wait randomly before restarting timer
-	await get_tree().create_timer(randf_range(3, 10))
+	$Timer.wait_time = randf_range(3, 10)
 	$Timer.start()
 
 func _on_frog_animation_animation_finished():

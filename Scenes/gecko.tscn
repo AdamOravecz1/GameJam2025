@@ -1,0 +1,140 @@
+[gd_scene load_steps=17 format=3 uid="uid://dr33m1jflgubb"]
+
+[ext_resource type="Script" path="res://Scripts/gecko.gd" id="1_fxo6y"]
+[ext_resource type="Texture2D" uid="uid://b1ghmqa8q7ms5" path="res://Sprites/Gecko.png" id="1_ue0xc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij1ja"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lctpm"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4el7"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luxnn"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgujh"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmd25"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btde6"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmgie"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yf4bj"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcvrc"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42nwu"]
+atlas = ExtResource("1_ue0xc")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b02es"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij1ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lctpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4el7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luxnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgujh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmd25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btde6")
+}],
+"loop": false,
+"name": &"eat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmgie")
+}],
+"loop": true,
+"name": &"stay",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yf4bj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcvrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42nwu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vleak"]
+size = Vector2(38, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0mmog"]
+radius = 45.0444
+
+[node name="Gecko" type="Node2D"]
+script = ExtResource("1_fxo6y")
+
+[node name="GeckoAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b02es")
+animation = &"walk"
+autoplay = "stay"
+
+[node name="Way" type="RayCast2D" parent="."]
+target_position = Vector2(52, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-4, -21)
+shape = SubResource("RectangleShape2D_vleak")
+
+[node name="Size" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Size"]
+shape = SubResource("CircleShape2D_0mmog")
+
+[connection signal="animation_finished" from="GeckoAnimation" to="." method="_on_gecko_animation_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Size" to="." method="_on_size_body_entered"]

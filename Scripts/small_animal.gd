@@ -72,7 +72,6 @@ func _on_timer_timeout():
 	var new_timer = get_tree().create_timer(rng.randf_range(3, 10))
 	await new_timer.timeout
 
-	print("most")
 	$Timer.start()  # Restarts the original Timer (if needed)
 
 

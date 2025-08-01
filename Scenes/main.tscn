@@ -1,5 +1,6 @@
-[gd_scene load_steps=51 format=3 uid="uid://hxme3shh4xb6"]
+[gd_scene load_steps=50 format=3 uid="uid://hxme3shh4xb6"]
 
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_u4m1k"]
 [ext_resource type="Texture2D" uid="uid://ci286dfxxgitn" path="res://Sprites/EmptyAquarium.png" id="1_xrdet"]
 [ext_resource type="Texture2D" uid="uid://dmladlj1vegxh" path="res://Sprites/MossLayer0.png" id="2_ruou6"]
 [ext_resource type="Texture2D" uid="uid://coystd0oxwrwu" path="res://Sprites/MossLayer1.png" id="3_vehcd"]
@@ -37,9 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://b5x7gv8bi8ykv" path="res://Sprites/DeadPothosLayer1.png" id="33_7rynf"]
 [ext_resource type="Texture2D" uid="uid://dd3r5h2lbycso" path="res://Sprites/DeadDwarfSnakePlantLayer0.png" id="36_r8coi"]
 [ext_resource type="Texture2D" uid="uid://ca4tskxn2vkoa" path="res://Sprites/DeadDwarfSnakePlantLayer1.png" id="37_5lh6v"]
-[ext_resource type="PackedScene" uid="uid://b5jcs0qh5sgu6" path="res://Scenes/small_animal.tscn" id="38_5c7gv"]
-[ext_resource type="PackedScene" uid="uid://bnik1op25tntb" path="res://Scenes/crab.tscn" id="39_l7aud"]
-[ext_resource type="PackedScene" uid="uid://bl8thy3s8ce6e" path="res://Scenes/frog.tscn" id="40_tc6q5"]
+[ext_resource type="Theme" uid="uid://c0uuw8w6ubs10" path="res://Themes/Button.tres" id="40_kiocg"]
 [ext_resource type="Texture2D" uid="uid://cci3wssqi8s0u" path="res://Sprites/Stand.png" id="41_go4eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcfwk"]
@@ -71,6 +70,7 @@ b = Vector2(-192, 0)
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_u4m1k")
 
 [node name="TopOfVine" type="Area2D" parent="."]
 collision_layer = 2
@@ -123,21 +123,25 @@ offset = Vector2(-18, 306)
 y_sort_enabled = true
 
 [node name="MossLayer0" type="Sprite2D" parent="Moss"]
+visible = false
 position = Vector2(-1, -250)
 texture = ExtResource("2_ruou6")
 offset = Vector2(1, 250)
 
 [node name="MossLayer1" type="Sprite2D" parent="Moss"]
+visible = false
 position = Vector2(5, -250)
 texture = ExtResource("3_vehcd")
 offset = Vector2(-5, 250)
 
 [node name="MossLayer2" type="Sprite2D" parent="Moss"]
+visible = false
 position = Vector2(1, -250)
 texture = ExtResource("4_e18b1")
 offset = Vector2(-1, 250)
 
 [node name="MossLayer3" type="Sprite2D" parent="Moss"]
+visible = false
 position = Vector2(5, -250)
 texture = ExtResource("5_3ie40")
 offset = Vector2(-5, 250)
@@ -170,21 +174,25 @@ offset = Vector2(-4, 250)
 y_sort_enabled = true
 
 [node name="FernLayer0" type="Sprite2D" parent="Fern"]
+visible = false
 position = Vector2(0, -240)
 texture = ExtResource("6_eofww")
 offset = Vector2(0, 240)
 
 [node name="FernLayer1" type="Sprite2D" parent="Fern"]
+visible = false
 position = Vector2(1, -240)
 texture = ExtResource("7_4r6ov")
 offset = Vector2(-1, 240)
 
 [node name="FernLayer2" type="Sprite2D" parent="Fern"]
+visible = false
 position = Vector2(1, -240)
 texture = ExtResource("8_8gil5")
 offset = Vector2(-1, 240)
 
 [node name="FernLayer3" type="Sprite2D" parent="Fern"]
+visible = false
 position = Vector2(4, -240)
 texture = ExtResource("9_vb0b0")
 offset = Vector2(-4, 240)
@@ -217,21 +225,25 @@ offset = Vector2(-1, 240)
 y_sort_enabled = true
 
 [node name="PileaGlaucaLayer0" type="Sprite2D" parent="PileaGlauca"]
+visible = false
 position = Vector2(7, -230)
 texture = ExtResource("10_8s1kx")
 offset = Vector2(-7, 230)
 
 [node name="PileaGlaucaLayer1" type="Sprite2D" parent="PileaGlauca"]
+visible = false
 position = Vector2(-3, -230)
 texture = ExtResource("11_obj0d")
 offset = Vector2(3, 230)
 
 [node name="PileaGlaucaLayer2" type="Sprite2D" parent="PileaGlauca"]
+visible = false
 position = Vector2(1, -230)
 texture = ExtResource("12_vfrko")
 offset = Vector2(-1, 230)
 
 [node name="PileaGlaucaLayer3" type="Sprite2D" parent="PileaGlauca"]
+visible = false
 position = Vector2(6, -230)
 texture = ExtResource("13_shpb2")
 offset = Vector2(-6, 230)
@@ -264,11 +276,13 @@ offset = Vector2(2, 230)
 y_sort_enabled = true
 
 [node name="OrchidLayer0" type="Sprite2D" parent="Orchid"]
+visible = false
 position = Vector2(39, -26)
 texture = ExtResource("14_siq48")
 offset = Vector2(-39, 26)
 
 [node name="OrchidLayer1" type="Sprite2D" parent="Orchid"]
+visible = false
 position = Vector2(-50, 59)
 texture = ExtResource("15_c1jxx")
 offset = Vector2(50, -59)
@@ -290,11 +304,13 @@ modulate = Color(0.921569, 0.921569, 0.937255, 1)
 y_sort_enabled = true
 
 [node name="PothosLayer0" type="Sprite2D" parent="Pothos"]
+visible = false
 position = Vector2(-1, 196)
 texture = ExtResource("16_nkfi0")
 offset = Vector2(1, -196)
 
 [node name="PothosLayer1" type="Sprite2D" parent="Pothos"]
+visible = false
 position = Vector2(0, 198)
 texture = ExtResource("17_opq4i")
 offset = Vector2(0, -198)
@@ -316,11 +332,13 @@ z_index = 1
 y_sort_enabled = true
 
 [node name="DwarfSnakePlantLayer0" type="Sprite2D" parent="DwarfSnakePlant"]
+visible = false
 position = Vector2(3, 239)
 texture = ExtResource("18_8as0l")
 offset = Vector2(-3, -239)
 
 [node name="DwarfSnakePlantLayer1" type="Sprite2D" parent="DwarfSnakePlant"]
+visible = false
 position = Vector2(-2, 242)
 texture = ExtResource("19_yps2x")
 offset = Vector2(2, -242)
@@ -340,26 +358,20 @@ offset = Vector2(-4, -242)
 [node name="Animals" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="SmallAnimals" type="Node2D" parent="Animals"]
+[node name="Isopod" type="Node2D" parent="Animals"]
 
-[node name="SmallAnimal" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
-position = Vector2(53, 2)
-selected_creature = "micro_land_snail"
+[node name="Millipede" type="Node2D" parent="Animals"]
 
-[node name="SmallAnimal2" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
-position = Vector2(-22, 49)
-selected_creature = "greenhouse_millipede"
+[node name="Snail" type="Node2D" parent="Animals"]
 
-[node name="SmallAnimal3" parent="Animals/SmallAnimals" instance=ExtResource("38_5c7gv")]
-
-[node name="LargeAnimals" type="Node2D" parent="Animals"]
+[node name="Frog" type="Node2D" parent="Animals"]
 y_sort_enabled = true
 
-[node name="Crab" parent="Animals/LargeAnimals" instance=ExtResource("39_l7aud")]
-position = Vector2(-348, 31)
+[node name="Crab" type="Node2D" parent="Animals"]
+y_sort_enabled = true
 
-[node name="Frog" parent="Animals/LargeAnimals" instance=ExtResource("40_tc6q5")]
-position = Vector2(52, 25)
+[node name="Gecko" type="Node2D" parent="Animals"]
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-143, 45)
@@ -369,4 +381,142 @@ zoom = Vector2(2, 2)
 z_index = 100
 texture = ExtResource("41_go4eq")
 
-[connection signal="area_exited" from="TopOfVine" to="Animals/SmallAnimals/SmallAnimal" method="_on_top_of_vine_area_exited"]
+[node name="Buttons" type="Node2D" parent="."]
+position = Vector2(-424, 0)
+
+[node name="SmallPlants" type="Node2D" parent="Buttons"]
+
+[node name="MossButton" type="Button" parent="Buttons/SmallPlants"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = -55.0
+offset_right = 50.0
+offset_bottom = -5.0
+theme = ExtResource("40_kiocg")
+text = "Moss"
+
+[node name="FernButton" type="Button" parent="Buttons/SmallPlants"]
+custom_minimum_size = Vector2(50, 50)
+offset_right = 50.0
+offset_bottom = 50.0
+theme = ExtResource("40_kiocg")
+text = "Fern"
+
+[node name="PileaGlaucaButton" type="Button" parent="Buttons/SmallPlants"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = 55.0
+offset_right = 50.0
+offset_bottom = 105.0
+theme = ExtResource("40_kiocg")
+text = "Pilea
+Glauca"
+alignment = 0
+
+[node name="LargePlants" type="Node2D" parent="Buttons"]
+position = Vector2(55, 0)
+
+[node name="OrchidButton" type="Button" parent="Buttons/LargePlants"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = -55.0
+offset_right = 50.0
+offset_bottom = -5.0
+theme = ExtResource("40_kiocg")
+text = "Orchid"
+
+[node name="PothosButton" type="Button" parent="Buttons/LargePlants"]
+custom_minimum_size = Vector2(50, 50)
+offset_right = 50.0
+offset_bottom = 50.0
+theme = ExtResource("40_kiocg")
+text = "Pothos"
+alignment = 2
+clip_text = true
+
+[node name="DwarfSnakePlantButton" type="Button" parent="Buttons/LargePlants"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = 55.0
+offset_right = 50.0
+offset_bottom = 105.0
+theme = ExtResource("40_kiocg")
+text = "Dwarf
+Snake
+Plant"
+
+[node name="SmallAnimals" type="Node2D" parent="Buttons"]
+position = Vector2(110, 0)
+
+[node name="Isopod" type="Button" parent="Buttons/SmallAnimals"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = -55.0
+offset_right = 50.0
+offset_bottom = -5.0
+theme = ExtResource("40_kiocg")
+text = "Dwarf
+White
+Isopod"
+alignment = 0
+
+[node name="Millipede" type="Button" parent="Buttons/SmallAnimals"]
+custom_minimum_size = Vector2(50, 50)
+offset_right = 50.0
+offset_bottom = 50.0
+theme = ExtResource("40_kiocg")
+theme_override_font_sizes/font_size = 8
+text = "Green-
+house
+Milli-
+pede"
+alignment = 0
+
+[node name="Snail" type="Button" parent="Buttons/SmallAnimals"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = 55.0
+offset_right = 50.0
+offset_bottom = 105.0
+theme = ExtResource("40_kiocg")
+text = "Micro
+Land
+Snail"
+alignment = 0
+
+[node name="LargeAnimals" type="Node2D" parent="Buttons"]
+position = Vector2(165, 0)
+
+[node name="Frog" type="Button" parent="Buttons/LargeAnimals"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = -55.0
+offset_right = 50.0
+offset_bottom = -5.0
+theme = ExtResource("40_kiocg")
+text = "Frog
+"
+
+[node name="Crab" type="Button" parent="Buttons/LargeAnimals"]
+custom_minimum_size = Vector2(50, 50)
+offset_right = 50.0
+offset_bottom = 50.0
+theme = ExtResource("40_kiocg")
+text = "Crab
+"
+
+[node name="Gecko" type="Button" parent="Buttons/LargeAnimals"]
+custom_minimum_size = Vector2(50, 50)
+offset_top = 55.0
+offset_right = 50.0
+offset_bottom = 105.0
+theme = ExtResource("40_kiocg")
+text = " Gecko"
+alignment = 0
+
+[connection signal="pressed" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_pressed"]
+[connection signal="pressed" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_pressed"]
+[connection signal="pressed" from="Buttons/SmallPlants/PileaGlaucaButton" to="." method="_on_pilea_glauca_button_pressed"]
+[connection signal="pressed" from="Buttons/LargePlants/OrchidButton" to="." method="_on_orchid_button_pressed"]
+[connection signal="pressed" from="Buttons/LargePlants/PothosButton" to="." method="_on_pothos_button_pressed"]
+[connection signal="pressed" from="Buttons/LargePlants/DwarfSnakePlantButton" to="." method="_on_dwarf_snake_plant_button_pressed"]
+[connection signal="pressed" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopode_pressed"]
+[connection signal="pressed" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopod_pressed"]
+[connection signal="pressed" from="Buttons/SmallAnimals/Millipede" to="." method="_on_millipede_pressed"]
+[connection signal="pressed" from="Buttons/SmallAnimals/Snail" to="." method="_on_snail_pressed"]
+[connection signal="pressed" from="Buttons/LargeAnimals/Frog" to="." method="_on_frog_pressed"]
+[connection signal="pressed" from="Buttons/LargeAnimals/Crab" to="." method="_on_crab_pressed"]
+[connection signal="pressed" from="Buttons/LargeAnimals/Gecko" to="." method="_on_gecko_pressed"]
