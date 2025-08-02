@@ -21,6 +21,8 @@ var gecko := preload("res://Scenes/gecko.tscn")
 var game_speed = [play_icon, fast_forward_icon, pause_icon]
 var game_speed_counter = 0
 
+var game_on = false
+
 var sound = true
 var endless_mode = false
 
@@ -32,6 +34,11 @@ var fertilizer = 30
 var restart_game = true
 
 var score = 0
+var high_score = 0
+
+var gecko_stat = gecko.instantiate()
+var frog_stat = frog.instantiate()
+var crab_stat = crab.instantiate()
 
 var moss = {
 	"name" = "Moss",
@@ -54,7 +61,7 @@ var fern = {
 	"showing" = 0,
 	"growing_strength" = 0.7,
 	"rot_rate" = -8,
-	"hunger" = 0.7,
+	"hunger" = 1.25,
 	"number" = 4,
 	"nutrition" = 7.0
 }
@@ -67,7 +74,7 @@ var pilea_glauca = {
 	"showing" = 0,
 	"growing_strength" = 0.5,
 	"rot_rate" = -5,
-	"hunger" = 0.5,
+	"hunger" = 1.5,
 	"number" = 4,
 	"nutrition" = 10.0
 }
@@ -80,7 +87,7 @@ var orchid = {
 	"showing" = 0,
 	"growing_strength" = 0.5,
 	"rot_rate" = -10,
-	"hunger" = 1.0,
+	"hunger" = 3,
 	"number" = 2,
 	"nutrition" = 19.0
 }
@@ -92,7 +99,7 @@ var pothos = {
 	"showing" = 0,
 	"growing_strength" = 0.8,
 	"rot_rate" = -15,
-	"hunger" = 1.5,
+	"hunger" = 2.5,
 	"number" = 2,
 	"nutrition" = 15.0
 }
@@ -114,26 +121,26 @@ var plants = [moss, fern, pilea_glauca, orchid, dwarf_snake_plant, pothos]
 
 var isopod = {
 	"name" = "Isopod",
-	"health" = 20,
+	"health" = 10,
 	"eats" = 30.0,
-	"nutrition" = 1.0,
+	"nutrition" = 0.5,
 	"hunger_sensitivity" = 1
 }
 
 var millipede = {
 	"name" = "Millipede",
 	"health" = 30,
-	"eats" = 40.0,
-	"nutrition" = 1.5,
-	"hunger_sensitivity" = 2
+	"eats" = 80.0,
+	"nutrition" = 0.75,
+	"hunger_sensitivity" = 3
 }
 
 var snail = {
 	"name" = "Snail",
-	"health" = 40,
-	"eats" = 50.0,
-	"nutrition" = 2.0,
-	"hunger_sensitivity" = 3
+	"health" = 50,
+	"eats" = 150.0,
+	"nutrition" = 1.0,
+	"hunger_sensitivity" = 5
 }
 
 var small_animals = {
@@ -274,7 +281,7 @@ func add_small_animal(name):
 
 func _on_timer_timeout():
 	score += 1
-	
+	$Score.text = str(score)
 	restart_game = true
 	plant_loop(pilea_glauca)
 	plant_loop(fern)
@@ -284,12 +291,11 @@ func _on_timer_timeout():
 	plant_loop(dwarf_snake_plant)
 	small_animal_cycle()
 	big_animal_cycle()
-	print("fertilizer: ", fertilizer)
+	#print("fertilizer: ", fertilizer)
 	#print("plant_material: ", plant_material)
 	if restart_game:
 		new_game()
 		
-	$Score.text = str(score)
 
 	
 func plant_loop(plant):
@@ -368,26 +374,27 @@ func eat_small_animal():
 		var current_type = (type_to_eat + tried) % 3
 		match current_type:
 			0:
-				if $Animals/Isopod.get_child_count() > 0:
-					$Animals/Isopod.get_child(0).queue_free()
+				var count := $Animals/Isopod.get_child_count()
+				if count > 0:
+					$Animals/Isopod.get_child(count - 1).queue_free()
 					fertilizer += big_animal_present.nutrition * isopod["nutrition"]
-					print("iso")
 					found_food = true
 			1:
-				if $Animals/Millipede.get_child_count() > 0:
-					$Animals/Millipede.get_child(0).queue_free()
+				var count := $Animals/Millipede.get_child_count()
+				if count > 0:
+					$Animals/Millipede.get_child(count - 1).queue_free()
 					fertilizer += big_animal_present.nutrition * millipede["nutrition"]
-					print("milli")
 					found_food = true
 			2:
-				if $Animals/Snail.get_child_count() > 0:
-					$Animals/Snail.get_child(0).queue_free()
+				var count := $Animals/Snail.get_child_count()
+				if count > 0:
+					$Animals/Snail.get_child(count - 1).queue_free()
 					fertilizer += big_animal_present.nutrition * snail["nutrition"]
-					print("snail")
 					found_food = true
 		tried += 1
 
 	type_to_eat += 1
+
 
 func _on_sound_pressed():
 	var bus_index = AudioServer.get_bus_index("SFX")
@@ -398,18 +405,23 @@ func _on_sound_pressed():
 
 
 func _on_start_pressed():
-	Engine.time_scale = 1
+	game_on = true
+	if game_speed_counter%3 == 1:
+		Engine.time_scale = 4
+	elif game_speed_counter%3 == 2:
+		Engine.time_scale = 0
+	else:
+		Engine.time_scale = 1
 	$EndlessMode.hide()
+	$NewGame.show()
+	$Start.hide()
 	if not endless_mode:
 		$Buttons.hide()
 		$ScoreLabel.position.y = 2
 		$Score.position.y = 42
-		$Start.hide()
-	if endless_mode:
-		$NewGame.show()
-		$Start.hide()
 		
 func new_game():
+	game_on = false
 	$NewGame.hide()
 	$EndlessMode.show()
 	$Start.show()
@@ -421,6 +433,9 @@ func new_game():
 	plant_material = 0
 	fertilizer = 30
 	Engine.time_scale = 0
+	if score > high_score-1 and not endless_mode:
+		high_score = score-1
+		$HighScore.text = str(high_score)
 	score = 0
 	$Score.text = str(score)
 
@@ -435,8 +450,6 @@ func _on_endless_mode_pressed():
 		
 
 func _on_new_game_pressed():
-	
-	$Start.show()
 	new_game()
 	big_animal_present = null
 	for plant in plants:
@@ -480,9 +493,118 @@ func _on_music_button_pressed():
 func _on_speed_pressed():
 	game_speed_counter += 1
 	$Speed.icon = game_speed[game_speed_counter%3]
-	if game_speed_counter%3 == 1:
-		Engine.time_scale = 4
-	elif game_speed_counter%3 == 2:
-		Engine.time_scale = 0
-	else:
-		Engine.time_scale = 1
+	if game_on:
+		if game_speed_counter%3 == 1:
+			Engine.time_scale = 4
+		elif game_speed_counter%3 == 2:
+			Engine.time_scale = 0
+		else:
+			Engine.time_scale = 1
+			
+
+func _process(delta):
+	$PlantStats.position = get_global_mouse_position() - get_global_position() + Vector2(5, 5)
+	$SmallAnimalStats.position = get_global_mouse_position() - get_global_position() + Vector2(5, 5)
+	$LargeAnimalStats.position = get_global_mouse_position() - get_global_position() + Vector2(5, 5)
+	
+func set_plant_stats(plant):
+	$PlantStats/PlantLabel.text = "Grow Strengt: " + str(plant["growing_strength"]) + "
+	Hunger: " + str(plant["hunger"]) + "
+	Nutrition: " + str(plant["nutrition"])
+	
+func set_small_animal_stats(animal):
+	$SmallAnimalStats/SmallAnimalLabel.text = "Health: " + str(animal["health"]) + "
+	Hunger: " + str(animal["eats"]) + "
+	Nutrition: " + str(animal["nutrition"]) + "
+	Hunger Sensitivity: " + str(animal["hunger_sensitivity"])
+	
+func set_large_animal_stats(animal):
+	$LargeAnimalStats/LargeAnimalLabel.text = "Hunger: " + str(animal.hunger) + "
+	Nutrition: " + str(animal.nutrition)
+
+func _on_moss_button_mouse_entered():
+	$PlantStats.show()
+	set_plant_stats(moss)
+
+func _on_moss_button_mouse_exited():
+	$PlantStats.hide()
+	
+
+func _on_fern_button_mouse_entered():
+	$PlantStats.show()
+	set_plant_stats(fern)
+	
+func _on_fern_button_mouse_exited():
+	$PlantStats.hide()
+
+
+func _on_pilea_glauca_button_mouse_entered():
+	$PlantStats.show()
+	set_plant_stats(pilea_glauca)
+
+func _on_pilea_glauca_button_mouse_exited():
+	$PlantStats.hide()
+
+func _on_orchid_button_mouse_entered():
+	$PlantStats.show()
+	set_plant_stats(orchid)
+
+func _on_orchid_button_mouse_exited():
+	$PlantStats.hide()
+
+func _on_pothos_button_mouse_entered():
+	$PlantStats.show()
+	set_plant_stats(pothos)
+
+func _on_pothos_button_mouse_exited():
+	$PlantStats.hide()
+
+func _on_dwarf_snake_plant_button_mouse_entered():
+	$PlantStats.show()
+	set_plant_stats(dwarf_snake_plant)
+
+func _on_dwarf_snake_plant_button_mouse_exited():
+	$PlantStats.hide()
+	
+func _on_isopod_mouse_entered():
+	$SmallAnimalStats.show()
+	set_small_animal_stats(isopod)
+
+func _on_isopod_mouse_exited():
+	$SmallAnimalStats.hide()
+
+
+func _on_millipede_mouse_entered():
+	$SmallAnimalStats.show()
+	set_small_animal_stats(millipede)
+
+func _on_millipede_mouse_exited():
+	$SmallAnimalStats.hide()
+
+func _on_snail_mouse_entered():
+	$SmallAnimalStats.show()
+	set_small_animal_stats(snail)
+
+func _on_snail_mouse_exited():
+	$SmallAnimalStats.hide()
+
+func _on_frog_mouse_entered():
+	$LargeAnimalStats.show()
+	set_large_animal_stats(frog_stat)
+
+func _on_frog_mouse_exited():
+	$LargeAnimalStats.hide()
+	
+func _on_crab_mouse_entered():
+	$LargeAnimalStats.show()
+	set_large_animal_stats(crab_stat)
+
+func _on_crab_mouse_exited():
+	$LargeAnimalStats.hide()
+
+func _on_gecko_mouse_entered():
+	$LargeAnimalStats.show()
+	set_large_animal_stats(gecko_stat)
+
+func _on_gecko_mouse_exited():
+	$LargeAnimalStats.hide()

@@ -7,7 +7,7 @@ extends  Node2D
 @onready var gecko_animation = $GeckoAnimation
 
 var hunger = 10
-var nutrition = 20
+var nutrition = 15
 
 var walk = false
 

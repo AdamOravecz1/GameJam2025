@@ -8,7 +8,7 @@ extends Node2D
 @onready var crab = $Crab
 
 var hunger = 30
-var nutrition = 60
+var nutrition = 45
 
 var walk = true
 

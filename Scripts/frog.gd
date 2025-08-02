@@ -7,7 +7,7 @@ extends Node2D
 @export var move_speed := 100
 
 var hunger = 20
-var nutrition = 40
+var nutrition = 30
 
 var direction = 1
 var jump = false

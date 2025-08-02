@@ -105,6 +105,7 @@ func cycle():
 		compost_counter -= 1
 		triger_death()
 
+
 	
 func triger_death():
 	alive = false

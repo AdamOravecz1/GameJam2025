@@ -585,6 +585,11 @@ bus = &"SFX"
 stream = ExtResource("43_3cysk")
 bus = &"SFX"
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("48_1r5bm")
+autoplay = true
+bus = &"Music"
+
 [node name="ScoreLabel" type="Label" parent="."]
 offset_left = -335.0
 offset_top = -110.0
@@ -700,23 +705,120 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_rg13n")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n6hgt")
 icon = ExtResource("49_sx8fm")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("48_1r5bm")
-autoplay = true
-bus = &"Music"
+[node name="HighScoreLabel" type="Label" parent="."]
+offset_left = -54.0
+offset_top = -118.0
+offset_right = 16.0
+offset_bottom = -110.0
+theme_override_colors/font_color = Color(0.917647, 0.792157, 0, 1)
+theme_override_fonts/font = ExtResource("45_xrfuq")
+theme_override_font_sizes/font_size = 8
+text = "High Score:"
 
+[node name="HighScore" type="Label" parent="."]
+offset_left = 27.0
+offset_top = -118.0
+offset_right = 34.0
+offset_bottom = -110.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("45_xrfuq")
+theme_override_font_sizes/font_size = 8
+text = "0"
+
+[node name="PlantStats" type="ColorRect" parent="."]
+visible = false
+z_index = 4096
+offset_left = -348.0
+offset_top = -18.0
+offset_right = -231.0
+offset_bottom = 14.0
+color = Color(0, 0, 0, 0.776471)
+
+[node name="PlantLabel" type="Label" parent="PlantStats"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("45_xrfuq")
+theme_override_font_sizes/font_size = 8
+text = "Grow Strengt:
+Hunger:
+Nutrition:"
+
+[node name="SmallAnimalStats" type="ColorRect" parent="."]
+visible = false
+z_index = 4096
+offset_left = -202.0
+offset_top = 62.0
+offset_right = -57.0
+offset_bottom = 104.0
+color = Color(0, 0, 0, 0.776471)
+
+[node name="SmallAnimalLabel" type="Label" parent="SmallAnimalStats"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("45_xrfuq")
+theme_override_font_sizes/font_size = 8
+text = "Health:
+Hunger:
+Nutrtion:
+Hunger Sensitivity:"
+
+[node name="LargeAnimalStats" type="ColorRect" parent="."]
+visible = false
+z_index = 4096
+offset_left = -202.0
+offset_top = 62.0
+offset_right = -117.0
+offset_bottom = 82.0
+color = Color(0, 0, 0, 0.776471)
+
+[node name="LargeAnimalLabel" type="Label" parent="LargeAnimalStats"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("45_xrfuq")
+theme_override_font_sizes/font_size = 8
+text = "Hunger:
+Nutrtion:
+"
+
+[connection signal="mouse_entered" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_mouse_exited"]
 [connection signal="pressed" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_pressed"]
+[connection signal="mouse_entered" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_mouse_exited"]
 [connection signal="pressed" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_pressed"]
+[connection signal="mouse_entered" from="Buttons/SmallPlants/PileaGlaucaButton" to="." method="_on_pilea_glauca_button_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/SmallPlants/PileaGlaucaButton" to="." method="_on_pilea_glauca_button_mouse_exited"]
 [connection signal="pressed" from="Buttons/SmallPlants/PileaGlaucaButton" to="." method="_on_pilea_glauca_button_pressed"]
+[connection signal="mouse_entered" from="Buttons/LargePlants/OrchidButton" to="." method="_on_orchid_button_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/LargePlants/OrchidButton" to="." method="_on_orchid_button_mouse_exited"]
 [connection signal="pressed" from="Buttons/LargePlants/OrchidButton" to="." method="_on_orchid_button_pressed"]
+[connection signal="mouse_entered" from="Buttons/LargePlants/PothosButton" to="." method="_on_pothos_button_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/LargePlants/PothosButton" to="." method="_on_pothos_button_mouse_exited"]
 [connection signal="pressed" from="Buttons/LargePlants/PothosButton" to="." method="_on_pothos_button_pressed"]
+[connection signal="mouse_entered" from="Buttons/LargePlants/DwarfSnakePlantButton" to="." method="_on_dwarf_snake_plant_button_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/LargePlants/DwarfSnakePlantButton" to="." method="_on_dwarf_snake_plant_button_mouse_exited"]
 [connection signal="pressed" from="Buttons/LargePlants/DwarfSnakePlantButton" to="." method="_on_dwarf_snake_plant_button_pressed"]
+[connection signal="mouse_entered" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopod_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopod_mouse_exited"]
 [connection signal="pressed" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopod_pressed"]
 [connection signal="pressed" from="Buttons/SmallAnimals/Isopod" to="." method="_on_isopode_pressed"]
+[connection signal="mouse_entered" from="Buttons/SmallAnimals/Millipede" to="." method="_on_millipede_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/SmallAnimals/Millipede" to="." method="_on_millipede_mouse_exited"]
 [connection signal="pressed" from="Buttons/SmallAnimals/Millipede" to="." method="_on_millipede_pressed"]
+[connection signal="mouse_entered" from="Buttons/SmallAnimals/Snail" to="." method="_on_snail_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/SmallAnimals/Snail" to="." method="_on_snail_mouse_exited"]
 [connection signal="pressed" from="Buttons/SmallAnimals/Snail" to="." method="_on_snail_pressed"]
+[connection signal="mouse_entered" from="Buttons/LargeAnimals/Frog" to="." method="_on_frog_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/LargeAnimals/Frog" to="." method="_on_frog_mouse_exited"]
 [connection signal="pressed" from="Buttons/LargeAnimals/Frog" to="." method="_on_frog_pressed"]
+[connection signal="mouse_entered" from="Buttons/LargeAnimals/Crab" to="." method="_on_crab_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/LargeAnimals/Crab" to="." method="_on_crab_mouse_exited"]
 [connection signal="pressed" from="Buttons/LargeAnimals/Crab" to="." method="_on_crab_pressed"]
+[connection signal="mouse_entered" from="Buttons/LargeAnimals/Gecko" to="." method="_on_gecko_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/LargeAnimals/Gecko" to="." method="_on_gecko_mouse_exited"]
 [connection signal="pressed" from="Buttons/LargeAnimals/Gecko" to="." method="_on_gecko_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
