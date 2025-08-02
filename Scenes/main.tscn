@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://hxme3shh4xb6"]
+[gd_scene load_steps=72 format=3 uid="uid://hxme3shh4xb6"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_u4m1k"]
 [ext_resource type="Texture2D" uid="uid://ci286dfxxgitn" path="res://Sprites/EmptyAquarium.png" id="1_xrdet"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://vd7drletby43" path="res://Sprites/SoundOn.png" id="44_arqud"]
 [ext_resource type="FontFile" uid="uid://caswad0e4wnv2" path="res://Fonts/PixelOperator.ttf" id="45_xrfuq"]
 [ext_resource type="Theme" uid="uid://74khrow5p36h" path="res://Themes/StartButton.tres" id="46_fuqrg"]
+[ext_resource type="Texture2D" uid="uid://cgeojivcjesyp" path="res://Sprites/FullScreenOff.png" id="47_o4sx7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcfwk"]
 size = Vector2(26, 12)
@@ -93,6 +94,16 @@ b = Vector2(-192, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ftd4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2447j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7gl2b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3xnpe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5nu26"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l5dyg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7erh1"]
 
 [node name="Main" type="Node2D" groups=["Main"]]
 y_sort_enabled = true
@@ -628,6 +639,19 @@ text = "Endless
 Mode:
 Off"
 
+[node name="FullScreen" type="Button" parent="."]
+offset_left = -437.0
+offset_top = 127.0
+offset_right = -405.0
+offset_bottom = 159.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7gl2b")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3xnpe")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5nu26")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l5dyg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7erh1")
+toggle_mode = true
+icon = ExtResource("47_o4sx7")
+
 [connection signal="pressed" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_pressed"]
 [connection signal="pressed" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_pressed"]
 [connection signal="pressed" from="Buttons/SmallPlants/PileaGlaucaButton" to="." method="_on_pilea_glauca_button_pressed"]
@@ -646,3 +670,4 @@ Off"
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="EndlessMode" to="." method="_on_endless_mode_pressed"]
+[connection signal="pressed" from="FullScreen" to="." method="_on_full_screen_pressed"]

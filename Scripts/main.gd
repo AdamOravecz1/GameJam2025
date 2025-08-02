@@ -10,6 +10,8 @@ var gecko := preload("res://Scenes/gecko.tscn")
 
 @export var sound_off = preload("res://Sprites/SoundOff.png")
 @export var sound_on = preload("res://Sprites/SoundOn.png")
+@export var full_screen_off = preload("res://Sprites/FullScreenOff.png")
+@export var full_screen_on = preload("res://Sprites/FullScreenOn.png")
 
 var sound = true
 var endless_mode = false
@@ -448,3 +450,12 @@ func _on_new_game_pressed():
 		plant.hide()
 	for plant in $DwarfSnakePlant.get_children():
 		plant.hide()
+
+
+func _on_full_screen_pressed():
+	if $FullScreen.button_pressed:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		$FullScreen.icon = full_screen_on
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		$FullScreen.icon = full_screen_off
