@@ -12,6 +12,14 @@ var gecko := preload("res://Scenes/gecko.tscn")
 @export var sound_on = preload("res://Sprites/SoundOn.png")
 @export var full_screen_off = preload("res://Sprites/FullScreenOff.png")
 @export var full_screen_on = preload("res://Sprites/FullScreenOn.png")
+@export var music_off = preload("res://Sprites/MusicOff.png")
+@export var music_on = preload("res://Sprites/MusicOn.png")
+@export var pause_icon = preload("res://Sprites/Pause.png")
+@export var play_icon = preload("res://Sprites/Play.png")
+@export var fast_forward_icon = preload("res://Sprites/FastForward.png")
+
+var game_speed = [play_icon, fast_forward_icon, pause_icon]
+var game_speed_counter = 0
 
 var sound = true
 var endless_mode = false
@@ -459,3 +467,22 @@ func _on_full_screen_pressed():
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		$FullScreen.icon = full_screen_off
+
+
+func _on_music_button_pressed():
+	var bus_index = AudioServer.get_bus_index("Music")
+	var is_muted = $MusicButton.button_pressed
+	
+	AudioServer.set_bus_mute(bus_index, is_muted)
+	$MusicButton.icon = music_off if is_muted else music_on
+
+
+func _on_speed_pressed():
+	game_speed_counter += 1
+	$Speed.icon = game_speed[game_speed_counter%3]
+	if game_speed_counter%3 == 1:
+		Engine.time_scale = 4
+	elif game_speed_counter%3 == 2:
+		Engine.time_scale = 0
+	else:
+		Engine.time_scale = 1
