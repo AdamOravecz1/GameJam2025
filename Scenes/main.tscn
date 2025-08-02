@@ -1,7 +1,8 @@
-[gd_scene load_steps=50 format=3 uid="uid://hxme3shh4xb6"]
+[gd_scene load_steps=61 format=3 uid="uid://hxme3shh4xb6"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_u4m1k"]
 [ext_resource type="Texture2D" uid="uid://ci286dfxxgitn" path="res://Sprites/EmptyAquarium.png" id="1_xrdet"]
+[ext_resource type="Texture2D" uid="uid://ccmi0hqy8fs4k" path="res://Sprites/BackGround.png" id="2_nvs12"]
 [ext_resource type="Texture2D" uid="uid://dmladlj1vegxh" path="res://Sprites/MossLayer0.png" id="2_ruou6"]
 [ext_resource type="Texture2D" uid="uid://coystd0oxwrwu" path="res://Sprites/MossLayer1.png" id="3_vehcd"]
 [ext_resource type="Texture2D" uid="uid://bdt6voosh4qhq" path="res://Sprites/MossLayer2.png" id="4_e18b1"]
@@ -40,6 +41,11 @@
 [ext_resource type="Texture2D" uid="uid://ca4tskxn2vkoa" path="res://Sprites/DeadDwarfSnakePlantLayer1.png" id="37_5lh6v"]
 [ext_resource type="Theme" uid="uid://c0uuw8w6ubs10" path="res://Themes/Button.tres" id="40_kiocg"]
 [ext_resource type="Texture2D" uid="uid://cci3wssqi8s0u" path="res://Sprites/Stand.png" id="41_go4eq"]
+[ext_resource type="AudioStream" uid="uid://bf6klqc5f1lds" path="res://Sound/Plant.wav" id="42_bqxji"]
+[ext_resource type="AudioStream" uid="uid://b4mwtnxs0mevd" path="res://Sound/Animal.wav" id="43_3cysk"]
+[ext_resource type="Texture2D" uid="uid://vd7drletby43" path="res://Sprites/SoundOn.png" id="44_arqud"]
+[ext_resource type="FontFile" uid="uid://caswad0e4wnv2" path="res://Fonts/PixelOperator.ttf" id="45_xrfuq"]
+[ext_resource type="Theme" uid="uid://74khrow5p36h" path="res://Themes/StartButton.tres" id="46_fuqrg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcfwk"]
 size = Vector2(26, 12)
@@ -68,9 +74,25 @@ b = Vector2(0, -116)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_uflv2"]
 b = Vector2(-192, 0)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ruxel"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2km3s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2voet"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xrs0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_163jx"]
+
 [node name="Main" type="Node2D" groups=["Main"]]
 y_sort_enabled = true
 script = ExtResource("1_u4m1k")
+
+[node name="BackGround" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-228, 41)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_nvs12")
 
 [node name="TopOfVine" type="Area2D" parent="."]
 collision_layer = 2
@@ -382,7 +404,7 @@ z_index = 100
 texture = ExtResource("41_go4eq")
 
 [node name="Buttons" type="Node2D" parent="."]
-position = Vector2(-379, 0)
+position = Vector2(-379, 16)
 
 [node name="SmallPlants" type="Node2D" parent="Buttons"]
 
@@ -409,7 +431,6 @@ offset_bottom = 105.0
 theme = ExtResource("40_kiocg")
 text = "Pilea
 Glauca"
-alignment = 0
 
 [node name="LargePlants" type="Node2D" parent="Buttons"]
 position = Vector2(55, 0)
@@ -420,15 +441,16 @@ offset_top = 55.0
 offset_right = 50.0
 offset_bottom = 105.0
 theme = ExtResource("40_kiocg")
-text = "Orchid"
+text = " Orchid"
+alignment = 0
 
 [node name="PothosButton" type="Button" parent="Buttons/LargePlants"]
 custom_minimum_size = Vector2(50, 50)
 offset_right = 50.0
 offset_bottom = 50.0
 theme = ExtResource("40_kiocg")
-text = "Pothos"
-alignment = 2
+text = " Pothos"
+alignment = 0
 clip_text = true
 
 [node name="DwarfSnakePlantButton" type="Button" parent="Buttons/LargePlants"]
@@ -437,9 +459,10 @@ offset_top = -55.0
 offset_right = 50.0
 offset_bottom = -5.0
 theme = ExtResource("40_kiocg")
-text = "Dwarf
-Snake
-Plant"
+text = " Dwarf
+ Snake
+ Plant"
+alignment = 0
 
 [node name="SmallAnimals" type="Node2D" parent="Buttons"]
 position = Vector2(110, 0)
@@ -450,9 +473,9 @@ offset_top = -55.0
 offset_right = 50.0
 offset_bottom = -5.0
 theme = ExtResource("40_kiocg")
-text = "Dwarf
-White
-Isopod"
+text = " Dwarf
+ White
+ Isopod"
 alignment = 0
 
 [node name="Millipede" type="Button" parent="Buttons/SmallAnimals"]
@@ -461,10 +484,10 @@ offset_right = 50.0
 offset_bottom = 50.0
 theme = ExtResource("40_kiocg")
 theme_override_font_sizes/font_size = 8
-text = "Green-
-house
-Milli-
-pede"
+text = " Green-
+ house
+ Milli-
+ pede"
 alignment = 0
 
 [node name="Snail" type="Button" parent="Buttons/SmallAnimals"]
@@ -473,9 +496,9 @@ offset_top = 55.0
 offset_right = 50.0
 offset_bottom = 105.0
 theme = ExtResource("40_kiocg")
-text = "Micro
-Land
-Snail"
+text = " Micro
+ Land
+ Snail"
 alignment = 0
 
 [node name="LargeAnimals" type="Node2D" parent="Buttons"]
@@ -510,12 +533,55 @@ alignment = 0
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="food" type="Button" parent="."]
-offset_left = -323.0
-offset_top = 150.0
-offset_right = -279.0
-offset_bottom = 181.0
-text = "food"
+[node name="PlantSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("42_bqxji")
+bus = &"SFX"
+
+[node name="AnimalSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("43_3cysk")
+bus = &"SFX"
+
+[node name="Sound" type="Button" parent="."]
+offset_left = -428.0
+offset_top = 172.0
+offset_right = -396.0
+offset_bottom = 204.0
+theme_type_variation = &"FlatButton"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ruxel")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2km3s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2voet")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5xrs0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_163jx")
+toggle_mode = true
+icon = ExtResource("44_arqud")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = -346.0
+offset_top = -110.0
+offset_right = -186.0
+offset_bottom = -78.0
+theme_override_colors/font_color = Color(0.917647, 0.792157, 0, 1)
+theme_override_fonts/font = ExtResource("45_xrfuq")
+theme_override_font_sizes/font_size = 32
+text = "Score:"
+
+[node name="Score" type="Label" parent="."]
+offset_left = -293.0
+offset_top = -70.0
+offset_right = -251.0
+offset_bottom = -47.0
+theme_override_fonts/font = ExtResource("45_xrfuq")
+text = "000"
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="."]
+offset_left = -311.0
+offset_top = 133.0
+offset_right = -231.0
+offset_bottom = 161.0
+theme = ExtResource("46_fuqrg")
+theme_type_variation = &"FlatButton"
+text = "Start"
 
 [connection signal="pressed" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_pressed"]
 [connection signal="pressed" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_pressed"]
@@ -531,4 +597,5 @@ text = "food"
 [connection signal="pressed" from="Buttons/LargeAnimals/Crab" to="." method="_on_crab_pressed"]
 [connection signal="pressed" from="Buttons/LargeAnimals/Gecko" to="." method="_on_gecko_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="food" to="." method="_on_food_pressed"]
+[connection signal="pressed" from="Sound" to="." method="_on_sound_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

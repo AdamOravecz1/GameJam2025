@@ -5,12 +5,22 @@ var frog := preload("res://Scenes/frog.tscn")
 var crab := preload("res://Scenes/crab.tscn")
 var gecko := preload("res://Scenes/gecko.tscn")
 
+@onready var plant_sound = $PlantSound
+@onready var animal_sound = $AnimalSound
+
+@export var sound_off = preload("res://Sprites/SoundOff.png")
+@export var sound_on = preload("res://Sprites/SoundOn.png")
+
+var sound = true
+
 var found_food = false
 var type_to_eat = 0
 var big_animal_present = null
 var plant_material = 0.0
 var fertilizer = 30
 var restart_game = true
+
+var score = 0
 
 var moss = {
 	"name" = "Moss",
@@ -103,7 +113,7 @@ var millipede = {
 	"name" = "Millipede",
 	"health" = 30,
 	"eats" = 40.0,
-	"nutrition" = 2.0,
+	"nutrition" = 1.5,
 	"hunger_sensitivity" = 2
 }
 
@@ -111,7 +121,7 @@ var snail = {
 	"name" = "Snail",
 	"health" = 40,
 	"eats" = 50.0,
-	"nutrition" = 3.0,
+	"nutrition" = 2.0,
 	"hunger_sensitivity" = 3
 }
 
@@ -121,6 +131,10 @@ var small_animals = {
 	"snail" = snail
 }
 
+func _ready():
+	Engine.time_scale = 0
+	$Sound.icon = sound_on
+
 func _on_moss_button_pressed():
 	if moss["live"] < 4:
 		if moss["dead"] > 0:
@@ -128,7 +142,7 @@ func _on_moss_button_pressed():
 		moss["live"] += 1
 		$Moss.get_children()[moss["showing"]].show()
 		$Moss.get_children()[moss["showing"] + 4].hide()
-
+		plant_sound.play()
 		moss["showing"] += 1
 
 func _on_fern_button_pressed():
@@ -138,7 +152,7 @@ func _on_fern_button_pressed():
 		fern["live"] += 1
 		$Fern.get_children()[fern["showing"]].show()
 		$Fern.get_children()[fern["showing"] + 4].hide()
-
+		plant_sound.play()
 		fern["showing"] += 1
 
 func _on_pilea_glauca_button_pressed():
@@ -148,7 +162,7 @@ func _on_pilea_glauca_button_pressed():
 		pilea_glauca["live"] += 1
 		$PileaGlauca.get_children()[pilea_glauca["showing"]].show()
 		$PileaGlauca.get_children()[pilea_glauca["showing"] + 4].hide()
-
+		plant_sound.play()
 		pilea_glauca["showing"] += 1
 
 func _on_orchid_button_pressed():
@@ -158,7 +172,7 @@ func _on_orchid_button_pressed():
 		orchid["live"] += 1
 		$Orchid.get_children()[orchid["showing"]].show()
 		$Orchid.get_children()[orchid["showing"] + 2].hide()
-
+		plant_sound.play()
 		orchid["showing"] += 1
 
 func _on_pothos_button_pressed():
@@ -168,7 +182,7 @@ func _on_pothos_button_pressed():
 		pothos["live"] += 1
 		$Pothos.get_children()[pothos["showing"]].show()
 		$Pothos.get_children()[pothos["showing"] + 2].hide()
-
+		plant_sound.play()
 		pothos["showing"] += 1
 
 func _on_dwarf_snake_plant_button_pressed():
@@ -178,20 +192,24 @@ func _on_dwarf_snake_plant_button_pressed():
 		dwarf_snake_plant["live"] += 1
 		$DwarfSnakePlant.get_children()[dwarf_snake_plant["showing"]].show()
 		$DwarfSnakePlant.get_children()[dwarf_snake_plant["showing"] + 2].hide()
-
+		plant_sound.play()
 		dwarf_snake_plant["showing"] += 1
 
 func _on_isopod_pressed():
 	add_small_animal("dwarf_white_isopod")
+	animal_sound.play()
 
 func _on_millipede_pressed():
 	add_small_animal("greenhouse_millipede")
+	animal_sound.play()
 
 func _on_snail_pressed():
 	add_small_animal("micro_land_snail")
+	animal_sound.play()
 
 func _on_frog_pressed():
 	if big_animal_present == null:
+		animal_sound.play()
 		var animal := frog.instantiate()
 		var rand_x = randi_range(-40, 70)
 		var rand_y = randi_range(25, 100)
@@ -201,6 +219,7 @@ func _on_frog_pressed():
 
 func _on_crab_pressed():
 	if big_animal_present == null:
+		animal_sound.play()
 		var animal := crab.instantiate()
 		var rand_x = randi_range(-40, 70)
 		var rand_y = randi_range(25, 100)
@@ -210,6 +229,7 @@ func _on_crab_pressed():
 
 func _on_gecko_pressed():
 	if big_animal_present == null:
+		animal_sound.play()
 		var animal := gecko.instantiate()
 		var rand_x = randi_range(-40, 70)
 		var rand_y = randi_range(25, 100)
@@ -241,6 +261,8 @@ func add_small_animal(name):
 
 
 func _on_timer_timeout():
+	score += 1
+	
 	restart_game = true
 	plant_loop(pilea_glauca)
 	plant_loop(fern)
@@ -255,6 +277,10 @@ func _on_timer_timeout():
 	if restart_game:
 		plant_material = 0
 		fertilizer = 30
+		Engine.time_scale = 0
+		score = 0
+		
+	$Score.text = str(score)
 
 	
 func plant_loop(plant):
@@ -335,21 +361,32 @@ func eat_small_animal():
 			0:
 				if $Animals/Isopod.get_child_count() > 0:
 					$Animals/Isopod.get_child(0).queue_free()
+					fertilizer += big_animal_present.nutrition * isopod["nutrition"]
 					print("iso")
 					found_food = true
 			1:
 				if $Animals/Millipede.get_child_count() > 0:
 					$Animals/Millipede.get_child(0).queue_free()
+					fertilizer += big_animal_present.nutrition * millipede["nutrition"]
 					print("milli")
 					found_food = true
 			2:
 				if $Animals/Snail.get_child_count() > 0:
 					$Animals/Snail.get_child(0).queue_free()
+					fertilizer += big_animal_present.nutrition * snail["nutrition"]
 					print("snail")
 					found_food = true
 		tried += 1
 
 	type_to_eat += 1
 
-func _on_food_pressed():
-	fertilizer += 15
+func _on_sound_pressed():
+	var bus_index = AudioServer.get_bus_index("SFX")
+	var is_muted = $Sound.button_pressed
+	
+	AudioServer.set_bus_mute(bus_index, is_muted)
+	$Sound.icon = sound_off if is_muted else sound_on
+
+
+func _on_start_pressed():
+	Engine.time_scale = 1

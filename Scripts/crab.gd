@@ -58,9 +58,7 @@ func cycle():
 		walk = false
 		hunger = 30
 		main.eat_small_animal()
-		if main.found_food:
-			main.fertilizer += nutrition
-		else:
+		if not main.found_food:
 			main.big_animal_present = null
 			queue_free()
 

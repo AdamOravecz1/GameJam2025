@@ -101,7 +101,6 @@ func cycle():
 			health -= hunger_sensitive
 	else:
 		if compost_counter == 0:
-			main.fertilizer += nutrition
 			queue_free()
 		compost_counter -= 1
 		triger_death()

@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://74khrow5p36h"]
+
+[ext_resource type="FontFile" uid="uid://caswad0e4wnv2" path="res://Fonts/PixelOperator.ttf" id="1_t78p2"]
+[ext_resource type="Texture2D" uid="uid://dkaveiom31vmn" path="res://Sprites/StartButton2.png" id="2_wn1qw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ylhy4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_msag3"]
+texture = ExtResource("2_wn1qw")
+region_rect = Rect2(0, 0, 80, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r311t"]
+content_margin_top = 4.0
+texture = ExtResource("2_wn1qw")
+region_rect = Rect2(0, 28, 80, 28)
+
+[resource]
+Button/fonts/font = ExtResource("1_t78p2")
+Button/styles/focus = SubResource("StyleBoxEmpty_ylhy4")
+Button/styles/hover = SubResource("StyleBoxTexture_msag3")
+Button/styles/normal = SubResource("StyleBoxTexture_msag3")
+Button/styles/pressed = SubResource("StyleBoxTexture_r311t")
