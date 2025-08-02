@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://hxme3shh4xb6"]
+[gd_scene load_steps=66 format=3 uid="uid://hxme3shh4xb6"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_u4m1k"]
 [ext_resource type="Texture2D" uid="uid://ci286dfxxgitn" path="res://Sprites/EmptyAquarium.png" id="1_xrdet"]
@@ -83,6 +83,16 @@ b = Vector2(-192, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xrs0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_163jx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_esbyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r785n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pr1mr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ftd4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2447j"]
 
 [node name="Main" type="Node2D" groups=["Main"]]
 y_sort_enabled = true
@@ -396,7 +406,7 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-143, 45)
+position = Vector2(-151, 32)
 zoom = Vector2(2, 2)
 
 [node name="Stand" type="Sprite2D" parent="."]
@@ -404,7 +414,7 @@ z_index = 100
 texture = ExtResource("41_go4eq")
 
 [node name="Buttons" type="Node2D" parent="."]
-position = Vector2(-379, 16)
+position = Vector2(-368, 16)
 
 [node name="SmallPlants" type="Node2D" parent="Buttons"]
 
@@ -542,10 +552,10 @@ stream = ExtResource("43_3cysk")
 bus = &"SFX"
 
 [node name="Sound" type="Button" parent="."]
-offset_left = -428.0
-offset_top = 172.0
-offset_right = -396.0
-offset_bottom = 204.0
+offset_left = -437.0
+offset_top = 160.0
+offset_right = -405.0
+offset_bottom = 192.0
 theme_type_variation = &"FlatButton"
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ruxel")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_2km3s")
@@ -556,9 +566,9 @@ toggle_mode = true
 icon = ExtResource("44_arqud")
 
 [node name="ScoreLabel" type="Label" parent="."]
-offset_left = -346.0
+offset_left = -335.0
 offset_top = -110.0
-offset_right = -186.0
+offset_right = -175.0
 offset_bottom = -78.0
 theme_override_colors/font_color = Color(0.917647, 0.792157, 0, 1)
 theme_override_fonts/font = ExtResource("45_xrfuq")
@@ -566,22 +576,57 @@ theme_override_font_sizes/font_size = 32
 text = "Score:"
 
 [node name="Score" type="Label" parent="."]
-offset_left = -293.0
+offset_left = -282.0
 offset_top = -70.0
-offset_right = -251.0
+offset_right = -240.0
 offset_bottom = -47.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("45_xrfuq")
 text = "000"
 horizontal_alignment = 1
 
 [node name="Start" type="Button" parent="."]
-offset_left = -311.0
+offset_left = -300.0
 offset_top = 133.0
-offset_right = -231.0
+offset_right = -220.0
 offset_bottom = 161.0
 theme = ExtResource("46_fuqrg")
 theme_type_variation = &"FlatButton"
 text = "Start"
+
+[node name="NewGame" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(80, 28)
+offset_left = -317.0
+offset_top = 133.0
+offset_right = -203.0
+offset_bottom = 161.0
+theme = ExtResource("46_fuqrg")
+text = "New Game"
+
+[node name="EndlessMode" type="Button" parent="."]
+offset_left = -436.0
+offset_top = -128.0
+offset_right = -381.0
+offset_bottom = -96.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("45_xrfuq")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_esbyi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_r785n")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pr1mr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8ftd4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2447j")
+toggle_mode = true
+text = "Endless
+Mode:
+Off"
 
 [connection signal="pressed" from="Buttons/SmallPlants/MossButton" to="." method="_on_moss_button_pressed"]
 [connection signal="pressed" from="Buttons/SmallPlants/FernButton" to="." method="_on_fern_button_pressed"]
@@ -599,3 +644,5 @@ text = "Start"
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Sound" to="." method="_on_sound_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="EndlessMode" to="." method="_on_endless_mode_pressed"]

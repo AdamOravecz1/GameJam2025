@@ -12,6 +12,7 @@ var gecko := preload("res://Scenes/gecko.tscn")
 @export var sound_on = preload("res://Sprites/SoundOn.png")
 
 var sound = true
+var endless_mode = false
 
 var found_food = false
 var type_to_eat = 0
@@ -26,8 +27,8 @@ var moss = {
 	"name" = "Moss",
 	"live" = 0,
 	"dead" = 0,
-	"status" = 0,
-	"showing" = 0.0,
+	"status" = 0.0,
+	"showing" = 0,
 	"growing_strength" = 1.0,
 	"rot_rate" = -10,
 	"hunger" = 1.0,
@@ -39,8 +40,8 @@ var fern = {
 	"name" = "Fern",
 	"live" = 0,
 	"dead" = 0,
-	"status" = 0,
-	"showing" = 0.0,
+	"status" = 0.0,
+	"showing" = 0,
 	"growing_strength" = 0.7,
 	"rot_rate" = -8,
 	"hunger" = 0.7,
@@ -52,8 +53,8 @@ var pilea_glauca = {
 	"name" = "PileaGlauca",
 	"live" = 0,
 	"dead" = 0,
-	"status" = 0,
-	"showing" = 0.0,
+	"status" = 0.0,
+	"showing" = 0,
 	"growing_strength" = 0.5,
 	"rot_rate" = -5,
 	"hunger" = 0.5,
@@ -65,8 +66,8 @@ var orchid = {
 	"name" = "Orchid",
 	"live" = 0,
 	"dead" = 0,
-	"status" = 0,
-	"showing" = 0.0,
+	"status" = 0.0,
+	"showing" = 0,
 	"growing_strength" = 0.5,
 	"rot_rate" = -10,
 	"hunger" = 1.0,
@@ -77,8 +78,8 @@ var pothos = {
 	"name" = "Pothos",
 	"live" = 0,
 	"dead" = 0,
-	"status" = 0,
-	"showing" = 0.0,
+	"status" = 0.0,
+	"showing" = 0,
 	"growing_strength" = 0.8,
 	"rot_rate" = -15,
 	"hunger" = 1.5,
@@ -90,8 +91,8 @@ var dwarf_snake_plant = {
 	"name" = "DwarfSnakePlant",
 	"live" = 0,
 	"dead" = 0,
-	"status" = 0,
-	"showing" = 0.0,
+	"status" = 0.0,
+	"showing" = 0,
 	"growing_strength" = 1.0,
 	"rot_rate" = -20,
 	"hunger" = 2.0,
@@ -132,6 +133,7 @@ var small_animals = {
 }
 
 func _ready():
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	Engine.time_scale = 0
 	$Sound.icon = sound_on
 
@@ -275,10 +277,7 @@ func _on_timer_timeout():
 	print("fertilizer: ", fertilizer)
 	#print("plant_material: ", plant_material)
 	if restart_game:
-		plant_material = 0
-		fertilizer = 30
-		Engine.time_scale = 0
-		score = 0
+		new_game()
 		
 	$Score.text = str(score)
 
@@ -390,3 +389,62 @@ func _on_sound_pressed():
 
 func _on_start_pressed():
 	Engine.time_scale = 1
+	$EndlessMode.hide()
+	if not endless_mode:
+		$Buttons.hide()
+		$ScoreLabel.position.y = 2
+		$Score.position.y = 42
+		$Start.hide()
+	if endless_mode:
+		$NewGame.show()
+		$Start.hide()
+		
+func new_game():
+	$NewGame.hide()
+	$EndlessMode.show()
+	$Start.show()
+	if not endless_mode:
+		$ScoreLabel.position.y = -110
+		$Score.position.y = -70
+		$Buttons.show()
+		
+	plant_material = 0
+	fertilizer = 30
+	Engine.time_scale = 0
+	score = 0
+	$Score.text = str(score)
+
+
+func _on_endless_mode_pressed():
+	if $EndlessMode.button_pressed:
+		$EndlessMode.text = "Endless\nMode:\nOn"
+		endless_mode = true
+	else:
+		$EndlessMode.text = "Endless\nMode:\nOff"
+		endless_mode = false
+		
+
+func _on_new_game_pressed():
+	
+	$Start.show()
+	new_game()
+	big_animal_present = null
+	for plant in plants:
+		plant["live"] = 0
+		plant["dead"] = 0
+		plant["status"] = 0.0
+	for animals in $Animals.get_children():
+		for animal in animals.get_children():
+			animal.queue_free()
+	for plant in $Moss.get_children():
+		plant.hide()
+	for plant in $Fern.get_children():
+		plant.hide()
+	for plant in $PileaGlauca.get_children():
+		plant.hide()
+	for plant in $Orchid.get_children():
+		plant.hide()
+	for plant in $Pothos.get_children():
+		plant.hide()
+	for plant in $DwarfSnakePlant.get_children():
+		plant.hide()
